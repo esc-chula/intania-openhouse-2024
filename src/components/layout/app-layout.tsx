@@ -12,7 +12,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="absolute z-0 h-full w-full">
             <Image
-              src={`/assets/background/background-${backgroundNumber}.png`}
+              src={`/assets/background/background-${backgroundNumber}.webp`}
               alt="Background"
               fill
               className="select-none object-cover"
