@@ -1,3 +1,4 @@
+import AppLayout from "@/components/layout/app-layout";
 import { lineSeedSansTh } from "@/utils/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -15,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th">
-      <body className={lineSeedSansTh.className}>{children}</body>
+      <body className={lineSeedSansTh.className}>
+        <AppLayout>{children}</AppLayout>
+      </body>
     </html>
   );
 }

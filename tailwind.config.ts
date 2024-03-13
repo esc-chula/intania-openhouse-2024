@@ -8,10 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#D52941",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "button-solid": "linear-gradient(180deg, #FFF 0%, #F6DBDB 100%)",
+        "button-glass":
+          "linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(246, 219, 219, 0.20) 100%)",
+      },
+      boxShadow: {
+        "button-solid": "0px 4px 8px 0px rgba(0, 0, 0, 0.08)",
+        "button-glass": "0px 4px 8px 0px rgba(0, 0, 0, 0.05)",
       },
     },
   },
