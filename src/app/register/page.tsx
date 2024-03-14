@@ -4,6 +4,7 @@ import Header from "@/components/common/header";
 import { createDocument } from "@/server/firebase/firestore/create";
 import "firebase/firestore";
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -28,14 +29,15 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const id = "someuuid";
+    // TODO: save formData
+    const id = uuid();
     createDocument("register", id, formData);
   };
 
   return (
     <>
       <Header />
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-5/6 items-center justify-center">
         <form
           onSubmit={handleSubmit}
           className="flex w-full max-w-md flex-col items-center justify-center gap-5"
@@ -45,7 +47,7 @@ export default function Register() {
             name="prefix"
             value={formData.prefix}
             onChange={handleChange}
-            placeholder="Prefix"
+            placeholder="คำนำหน้าชื่อ"
             className="input"
             required
           />
@@ -54,7 +56,7 @@ export default function Register() {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            placeholder="First Name"
+            placeholder="ชื่อจริง"
             className="input"
             required
           />
@@ -64,7 +66,7 @@ export default function Register() {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            placeholder="Last Name"
+            placeholder="นามสกุล"
             className="input"
             required
           />
@@ -74,7 +76,7 @@ export default function Register() {
             name="nickname"
             value={formData.nickname}
             onChange={handleChange}
-            placeholder="Nickname"
+            placeholder="ชื่อเล่น"
             className="input"
             required
           />
@@ -93,7 +95,7 @@ export default function Register() {
             name="mobileNumber"
             value={formData.mobileNumber}
             onChange={handleChange}
-            placeholder="Mobile Number"
+            placeholder="เบอร์โทรศัพท์มือถือ"
             className="input"
             required
           />
@@ -103,7 +105,7 @@ export default function Register() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder="อีเมล"
             className="input"
             required
           />
@@ -113,7 +115,7 @@ export default function Register() {
             name="guardianPhone"
             value={formData.guardianPhone}
             onChange={handleChange}
-            placeholder="Guardian's Phone Number"
+            placeholder="เบอร์โทรศัพท์ผู้ปกครอง"
             className="input"
             required
           />
@@ -124,7 +126,7 @@ export default function Register() {
               name="academicYear"
               value={formData.academicYear}
               onChange={handleChange}
-              placeholder="Academic Year"
+              placeholder="ปีการศึกษา"
               className="input"
             />
           
@@ -133,7 +135,7 @@ export default function Register() {
               name="course"
               value={formData.course}
               onChange={handleChange}
-              placeholder="Course/Program"
+              placeholder="หลักสูตร"
               className="input"
             />
           
@@ -142,7 +144,7 @@ export default function Register() {
               name="school"
               value={formData.school}
               onChange={handleChange}
-              placeholder="School/Institution"
+              placeholder="โรงเรียน"
               className="input"
             />
           
@@ -151,13 +153,13 @@ export default function Register() {
               name="howFound"
               value={formData.howFound}
               onChange={handleChange}
-              placeholder="How did you hear about this event?"
+              placeholder="รู้จักงานนี้จากที่ไหน"
               className="input"
             />
           */}
 
           <button type="submit" className="btn">
-            Submit
+            ส่งข้อมูล
           </button>
         </form>
       </div>
