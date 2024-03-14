@@ -1,4 +1,4 @@
-import { getDoumentById } from "@/server/firebase/firestore/read";
+import { getDocumentById } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -9,7 +9,7 @@ export const GET = async (
     params: { userId: string };
   },
 ) => {
-  const { result, error } = await getDoumentById("users", userId);
+  const { result, error } = await getDocumentById("users", userId);
 
   if (error || !result) {
     return NextResponse.json(

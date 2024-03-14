@@ -9,7 +9,7 @@ import firebase_app from "../config";
 
 const db = getFirestore(firebase_app);
 
-export const getDoumentById = async (collection: string, id: string) => {
+export const getDocumentById = async (collection: string, id: string) => {
   const docRef = doc(db, collection, id);
 
   try {
