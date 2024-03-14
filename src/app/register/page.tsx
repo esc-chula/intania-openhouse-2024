@@ -2,12 +2,13 @@
 
 import Header from "@/components/common/header";
 import { createDocument } from "@/server/firebase/firestore/create";
+import { Student } from "@/types/user";
 import "firebase/firestore";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function Register() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Student>({
     prefix: "",
     firstName: "",
     lastName: "",
@@ -16,10 +17,6 @@ export default function Register() {
     mobileNumber: "",
     email: "",
     guardianPhone: "",
-    academicYear: "",
-    course: "",
-    school: "",
-    howFound: "",
   });
 
   const handleChange = (e) => {
