@@ -42,16 +42,21 @@ export default function Register() {
           className="flex w-full max-w-md flex-col items-center justify-center gap-5"
         >
           <select
-            id="prefix"
             name="prefix"
             value={formData.prefix}
             className="input"
             onChange={handleChange}
             required
           >
-            <option value="">คำนำหน้า</option>
-            <option value="male">ชาย</option>
-            <option value="female">หญิง</option>
+            <option value="" disabled selected hidden>
+              เลือกคำนำหน้า
+            </option>
+            <option value="male" className="text-black">
+              ชาย
+            </option>
+            <option value="female" className="text-black">
+              หญิง
+            </option>
           </select>
           <input
             type="text"
