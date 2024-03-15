@@ -27,7 +27,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center space-y-9 pb-5">
         <div className="flex flex-col items-center space-y-5">
-          <Link href="/register">
+          <Link href="/name">
             <Button size="lg" className="w-52">
               เริ่มเลย!
             </Button>
