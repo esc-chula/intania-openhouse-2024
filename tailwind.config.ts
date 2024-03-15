@@ -20,6 +20,21 @@ const config: Config = {
         "button-solid": "0px 4px 8px 0px rgba(0, 0, 0, 0.08)",
         "button-glass": "0px 4px 8px 0px rgba(0, 0, 0, 0.05)",
       },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "fade-out": {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.5s ease-in-out",
+        "fade-out": "fade-out 0.5s ease-in-out",
+        "fade-in-out": "fade-in 0.5s ease-in-out, fade-out 0.5s ease-in-out 3s",
+      },
     },
   },
   plugins: [],
