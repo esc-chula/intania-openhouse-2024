@@ -4,7 +4,7 @@ import Header from "@/components/common/header";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { Student } from "@/types/user";
 import "firebase/firestore";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function Register() {
@@ -19,12 +19,12 @@ export default function Register() {
     guardianPhone: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: save formData
     const id = uuid();
@@ -39,15 +39,17 @@ export default function Register() {
           onSubmit={handleSubmit}
           className="flex w-full max-w-md flex-col items-center justify-center gap-5"
         >
-          <input
-            type="text"
+          <select
+            id="prefix"
             name="prefix"
             value={formData.prefix}
-            onChange={handleChange}
-            placeholder="คำนำหน้าชื่อ"
             className="input"
             required
-          />
+          >
+            <option value="">คำนำหน้า</option>
+            <option value="Male">ชาย</option>
+            <option value="Female">หญิง</option>
+          </select>
           <input
             type="text"
             name="firstName"
@@ -155,8 +157,8 @@ export default function Register() {
             />
           */}
 
-          <button type="submit" className="btn">
-            ส่งข้อมูล
+          <button type="submit" className="button">
+            ไปต่อ
           </button>
         </form>
       </div>
