@@ -27,9 +27,10 @@ export default function Register() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    localStorage.setItem("formData", JSON.stringify(formData));
     // TODO: save formData
     const id = uuid();
-    createDocument("register", id, formData);
+    createDocument("users", id, formData);
   };
 
   return (
