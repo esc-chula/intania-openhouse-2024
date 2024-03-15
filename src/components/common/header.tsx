@@ -8,6 +8,7 @@ export default function Header() {
           src="/assets/logo/intania-oph-2024.svg"
           alt="Intania Open House 2024 Logo"
           fill
+          priority
           className="select-none"
         />
       </div>

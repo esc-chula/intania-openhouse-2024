@@ -6,3 +6,28 @@ body {
   color: white;
   background: black;
 }
+
+.input {
+  color: #fff;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+
+  display: flex;
+  width: 201px;
+  height: 40px;
+  padding: 10px 14px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(246, 219, 219, 0.2) 100%
+  );
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(2px);
+}
