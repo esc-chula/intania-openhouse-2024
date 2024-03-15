@@ -24,7 +24,7 @@ export default function Name() {
             id="name"
             name="name"
             type="text"
-            className="peer h-10 w-[200px] rounded-[18px] bg-transparent bg-button-glass px-3.5 pt-1 text-[15px] font-bold text-white placeholder-transparent shadow-button-glass focus:outline-none"
+            className="peer h-10 w-[200px] rounded-[18px] bg-transparent bg-button-glass px-3.5 pt-1 text-[15px] font-bold text-white placeholder-transparent shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 focus:outline-none"
             placeholder="ชื่อเล่น"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -32,7 +32,7 @@ export default function Name() {
           />
           <label
             htmlFor="name"
-            className="absolute left-3.5 top-1.5 text-[6px] text-white transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-[15px]  peer-placeholder-shown:font-normal peer-placeholder-shown:text-white peer-placeholder-shown:opacity-50  peer-focus:top-1.5 peer-focus:text-[6px] peer-focus:text-white peer-focus:opacity-100"
+            className="absolute left-3.5 top-1.5 text-[0.5rem] text-white transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal  peer-placeholder-shown:text-white peer-placeholder-shown:opacity-50 peer-focus:top-1.5  peer-focus:text-[0.5rem] peer-focus:text-white peer-focus:opacity-100"
           >
             ชื่อเล่น
           </label>
