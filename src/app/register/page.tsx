@@ -1,10 +1,11 @@
 "use client";
 
 import Header from "@/components/common/header";
+import Button from "@/components/ui/button";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { Student } from "@/types/user";
 import "firebase/firestore";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 export default function Register() {
@@ -19,7 +20,7 @@ export default function Register() {
     guardianPhone: "",
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -44,11 +45,12 @@ export default function Register() {
             name="prefix"
             value={formData.prefix}
             className="input"
+            onChange={handleChange}
             required
           >
             <option value="">คำนำหน้า</option>
-            <option value="Male">ชาย</option>
-            <option value="Female">หญิง</option>
+            <option value="male">ชาย</option>
+            <option value="female">หญิง</option>
           </select>
           <input
             type="text"
@@ -157,9 +159,7 @@ export default function Register() {
             />
           */}
 
-          <button type="submit" className="button">
-            ไปต่อ
-          </button>
+          <Button type="submit"> ไปต่อ </Button>
         </form>
       </div>
     </>
