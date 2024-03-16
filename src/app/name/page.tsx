@@ -2,6 +2,7 @@
 
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,23 +20,16 @@ export default function Name() {
     <div className="flex h-full w-full flex-col items-center justify-between pb-14 pt-5">
       <Header />
       {stage === 1 ? (
-        <div className="relative animate-fade-in">
-          <input
+        <div className="animate-fade-in">
+          <Input
             id="name"
             name="name"
             type="text"
-            className="peer h-10 w-[200px] rounded-[18px] bg-transparent bg-button-glass px-3.5 pt-1 text-[15px] font-bold text-white placeholder-transparent shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 focus:outline-none"
             placeholder="ชื่อเล่น"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <label
-            htmlFor="name"
-            className="absolute left-3.5 top-1.5 text-[0.5rem] text-white transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal  peer-placeholder-shown:text-white peer-placeholder-shown:opacity-50 peer-focus:top-1.5  peer-focus:text-[0.5rem] peer-focus:text-white peer-focus:opacity-100"
-          >
-            ชื่อเล่น
-          </label>
         </div>
       ) : (
         <p id="welcome" className="animate-fade-in text-2xl font-bold">

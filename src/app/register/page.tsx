@@ -3,6 +3,7 @@
 import { User } from "@/common/types/user";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import "firebase/firestore";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -67,72 +68,65 @@ export default function Register() {
               หญิง
             </option>
           </select>
-          <input
+          <Input
             type="text"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
             placeholder="ชื่อจริง"
-            className="input"
             required
           />
 
-          <input
+          <Input
             type="text"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
             placeholder="นามสกุล"
-            className="input"
             required
           />
 
-          <input
+          <Input
             type="text"
             name="nickname"
             value={formData.nickname}
             onChange={handleChange}
             placeholder="ชื่อเล่น"
-            className="input"
             required
           />
 
-          <input
+          <Input
             type="text"
             name="lineId"
             value={formData.lineId}
             onChange={handleChange}
             placeholder="Line ID"
-            className="input"
           />
 
-          <input
+          <Input
             type="text"
             name="mobileNumber"
             value={formData.mobileNumber}
             onChange={handleChange}
             placeholder="เบอร์โทรศัพท์มือถือ"
-            className="input"
             required
           />
 
-          <input
+          <Input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="อีเมล"
-            className="input"
             required
           />
 
-          <input
+          <Input
             type="text"
             name="guardianPhone"
             value={formData.guardianPhone}
             onChange={handleChange}
             placeholder="เบอร์โทรศัพท์ผู้ปกครอง"
-            className="input"
             required
           />
 
