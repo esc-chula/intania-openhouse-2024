@@ -1,13 +1,13 @@
 "use client";
 
+import { User } from "@/common/types/user";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
-import { Student } from "@/types/user";
 import "firebase/firestore";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function Register() {
-  const [formData, setFormData] = useState<Student>({
+  const [formData, setFormData] = useState<User>({
     prefix: "",
     firstName: "",
     lastName: "",
@@ -33,7 +33,6 @@ export default function Register() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem("formData", JSON.stringify(formData));
-    // TODO: save formData
     fetch("/api/user", {
       method: "POST",
       headers: {
