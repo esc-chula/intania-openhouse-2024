@@ -1,15 +1,13 @@
 "use client";
 
+import { User } from "@/common/types/user";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
-import { createDocument } from "@/server/firebase/firestore/create";
-import { Student } from "@/types/user";
 import "firebase/firestore";
-import { FormEvent, useState } from "react";
-import { v4 as uuid } from "uuid";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function Register() {
-  const [formData, setFormData] = useState<Student>({
+  const [formData, setFormData] = useState<User>({
     prefix: "",
     firstName: "",
     lastName: "",
@@ -20,6 +18,13 @@ export default function Register() {
     guardianPhone: "",
   });
 
+  useEffect(() => {
+    const storedFormData = localStorage.getItem("formData");
+    if (storedFormData) {
+      setFormData(JSON.parse(storedFormData));
+    }
+  }, []);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -28,9 +33,13 @@ export default function Register() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem("formData", JSON.stringify(formData));
-    // TODO: save formData
-    const id = uuid();
-    createDocument("users", id, formData);
+    fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
   };
 
   return (
@@ -48,7 +57,7 @@ export default function Register() {
             onChange={handleChange}
             required
           >
-            <option value="" disabled selected hidden>
+            <option value="" disabled hidden>
               เลือกคำนำหน้า
             </option>
             <option value="male" className="text-black">

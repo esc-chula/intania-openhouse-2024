@@ -1,4 +1,4 @@
-export type Student = {
+export type User = {
   prefix: string;
   firstName: string;
   lastName: string;
