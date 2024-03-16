@@ -6,8 +6,8 @@ import { FiInstagram } from "react-icons/fi";
 export default function Home() {
   return (
     <div className="flex h-full flex-col items-center justify-end space-y-[40%]">
-      <div className="space-y-3 text-center">
-        <div className="relative h-40 w-96">
+      <div className="w-full space-y-3 text-center">
+        <div className="relative h-40 w-full">
           <Image
             src="/assets/logo/intania-oph-2024.svg"
             alt="Intania Open House 2024 Logo"
