@@ -4,6 +4,7 @@ import { User } from "@/common/types/user";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import "firebase/firestore";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -51,7 +52,7 @@ export default function Register() {
           onSubmit={handleSubmit}
           className="flex w-full max-w-md flex-col items-center justify-center gap-5"
         >
-          <select
+          <Select
             name="prefix"
             value={formData.prefix}
             className="input"
@@ -67,7 +68,7 @@ export default function Register() {
             <option value="female" className="text-black">
               หญิง
             </option>
-          </select>
+          </Select>
           <Input
             type="text"
             name="firstName"
