@@ -18,6 +18,7 @@ export default function Register() {
     mobileNumber: "",
     email: "",
     guardianPhone: "",
+    workshops: [],
   });
 
   useEffect(() => {

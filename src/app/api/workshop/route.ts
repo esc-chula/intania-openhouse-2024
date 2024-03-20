@@ -34,11 +34,10 @@ export const POST = async (req: NextRequest) => {
   }
 
   const id = uuid();
-  const { result, error } = await createDocument(
-    "workshops",
-    id,
-    parseResponse.data,
-  );
+  const { result, error } = await createDocument("workshops", id, {
+    ...parseResponse.data,
+    users: [],
+  });
 
   if (error || !result) {
     return NextResponse.json(

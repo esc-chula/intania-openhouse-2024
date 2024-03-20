@@ -1,3 +1,4 @@
+import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
 import { getDocumentById } from "@/server/firebase/firestore/read";
 import { updateDocument } from "@/server/firebase/firestore/update";
@@ -22,26 +23,37 @@ export const POST = async (req: NextRequest) => {
 
   const parsedData = parseResponse.data;
 
-  const { result, error } = await getDocumentById(
-    "workshops",
-    parsedData.workshopId,
-  );
+  const workshop = await getDocumentById("workshops", parsedData.workshopId);
 
-  if (error || !result) {
+  if (workshop.error || !workshop.result) {
     return NextResponse.json(
       { message: "Error fetching data" },
       { status: 500 },
     );
   }
 
-  if (!result.exists()) {
+  if (!workshop.result.exists()) {
     return NextResponse.json(
       { message: "Workshop not found" },
       { status: 500 },
     );
   }
 
-  const workshopData = result.data() as Workshop;
+  const user = await getDocumentById("users", parsedData.userId);
+
+  if (user.error || !user.result) {
+    return NextResponse.json(
+      { message: "Error fetching data" },
+      { status: 500 },
+    );
+  }
+
+  if (!user.result.exists()) {
+    return NextResponse.json({ message: "User not found" }, { status: 500 });
+  }
+
+  const workshopData = workshop.result.data() as Workshop;
+  const userData = user.result.data() as User;
 
   if (workshopData.users.length >= workshopData.maxUser) {
     return NextResponse.json(
@@ -57,18 +69,33 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  const update = await updateDocument("workshops", parsedData.workshopId, {
-    users: Array.from(new Set([...workshopData.users, parsedData.userId])),
-  });
+  const updatedWorkshop = await updateDocument(
+    "workshops",
+    parsedData.workshopId,
+    {
+      users: Array.from(new Set([...workshopData.users, parsedData.userId])),
+    },
+  );
 
-  if (update.error || !update.result) {
+  if (updatedWorkshop.error || !updatedWorkshop.result) {
     return NextResponse.json(
       { message: "Error updating workshop" },
       { status: 500 },
     );
   }
 
-  return NextResponse.json(update);
+  const updatedUser = await updateDocument("users", parsedData.workshopId, {
+    workshops: Array.from(new Set([...userData.workshops, parsedData.userId])),
+  });
+
+  if (updatedUser.error || !updatedUser.result) {
+    return NextResponse.json(
+      { message: "Error updating user" },
+      { status: 500 },
+    );
+  }
+
+  return NextResponse.json(updatedUser, updatedWorkshop);
 };
 
 export const DELETE = async (req: NextRequest) => {

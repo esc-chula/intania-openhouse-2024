@@ -6,6 +6,6 @@ export const WorkshopSchema = z.object({
   date: z.string(),
   time: z.string(),
   location: z.string(),
-  users: z.array(z.string()),
+  users: z.optional(z.array(z.string())),
   maxUser: z.number(),
 });
