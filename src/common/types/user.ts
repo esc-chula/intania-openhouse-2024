@@ -11,4 +11,5 @@ export type User = {
   course?: string;
   school?: string;
   howFound?: string;
+  workshops: string[];
 };

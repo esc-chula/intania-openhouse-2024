@@ -1,11 +1,11 @@
-import { UserSchema } from "@/common/schema/user";
+import { WorkshopSchema } from "@/common/schema/workshop";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { getAllDocuments } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
 
 export const GET = async () => {
-  const { result, error } = await getAllDocuments("users");
+  const { result, error } = await getAllDocuments("workshops");
 
   if (error || !result) {
     return NextResponse.json(
@@ -24,7 +24,7 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
-  const parseResponse = UserSchema.safeParse(body);
+  const parseResponse = WorkshopSchema.safeParse(body);
 
   if (!parseResponse.success) {
     return NextResponse.json(
@@ -34,9 +34,9 @@ export const POST = async (req: NextRequest) => {
   }
 
   const id = uuid();
-  const { result, error } = await createDocument("users", id, {
+  const { result, error } = await createDocument("workshops", id, {
     ...parseResponse.data,
-    workshops: [],
+    users: [],
   });
 
   if (error || !result) {
