@@ -13,4 +13,5 @@ export const UserSchema = z.object({
   course: z.optional(z.string()),
   school: z.optional(z.string()),
   howFound: z.optional(z.string()),
+  workshop: z.optional(z.array(z.string())),
 });

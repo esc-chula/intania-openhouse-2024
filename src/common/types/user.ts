@@ -1,3 +1,5 @@
+import { Workshop } from "./workshop";
+
 export type User = {
   prefix: string;
   firstName: string;
@@ -11,4 +13,5 @@ export type User = {
   course?: string;
   school?: string;
   howFound?: string;
+  workshops: Workshop[];
 };
