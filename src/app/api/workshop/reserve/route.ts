@@ -77,12 +77,14 @@ export const POST = async (req: NextRequest) => {
     },
   );
 
-  if (updatedWorkshop.error || !updatedWorkshop.result) {
-    return NextResponse.json(
-      { message: "Error updating workshop" },
-      { status: 500 },
-    );
-  }
+  // TODO: investigate the result was undefined when the documents were updated successfully
+  // console.log(updatedWorkshop);
+  // if (updatedWorkshop.error || !updatedWorkshop.result) {
+  //   return NextResponse.json(
+  //     { message: "Error updating workshop" },
+  //     { status: 500 },
+  //   );
+  // }
 
   const updatedUser = await updateDocument("users", parsedData.userId, {
     workshops: Array.from(
@@ -90,14 +92,14 @@ export const POST = async (req: NextRequest) => {
     ),
   });
 
-  if (updatedUser.error || !updatedUser.result) {
-    return NextResponse.json(
-      { message: "Error updating user" },
-      { status: 500 },
-    );
-  }
+  // if (updatedUser.error || !updatedUser.result) {
+  //   return NextResponse.json(
+  //     { message: "Error updating user" },
+  //     { status: 500 },
+  //   );
+  // }
 
-  return NextResponse.json(updatedUser, updatedWorkshop);
+  return NextResponse.json({ updatedUser, updatedWorkshop });
 };
 
 export const DELETE = async (req: NextRequest) => {
@@ -167,12 +169,12 @@ export const DELETE = async (req: NextRequest) => {
     },
   );
 
-  if (updatedWorkshop.error || !updatedWorkshop.result) {
-    return NextResponse.json(
-      { message: "Error updating workshop" },
-      { status: 500 },
-    );
-  }
+  // if (updatedWorkshop.error || !updatedWorkshop.result) {
+  //   return NextResponse.json(
+  //     { message: "Error updating workshop" },
+  //     { status: 500 },
+  //   );
+  // }
 
   const updatedUser = await updateDocument("users", parsedData.userId, {
     workshops: userData.workshops.filter((workshopId) => {
@@ -180,12 +182,12 @@ export const DELETE = async (req: NextRequest) => {
     }),
   });
 
-  if (updatedUser.error || !updatedUser.result) {
-    return NextResponse.json(
-      { message: "Error updating user" },
-      { status: 500 },
-    );
-  }
+  // if (updatedUser.error || !updatedUser.result) {
+  //   return NextResponse.json(
+  //     { message: "Error updating user" },
+  //     { status: 500 },
+  //   );
+  // }
 
-  return NextResponse.json(updatedUser, updatedWorkshop);
+  return NextResponse.json({ updatedUser, updatedWorkshop });
 };
