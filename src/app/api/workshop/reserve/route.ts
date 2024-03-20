@@ -84,8 +84,10 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  const updatedUser = await updateDocument("users", parsedData.workshopId, {
-    workshops: Array.from(new Set([...userData.workshops, parsedData.userId])),
+  const updatedUser = await updateDocument("users", parsedData.userId, {
+    workshops: Array.from(
+      new Set([...userData.workshops, parsedData.workshopId]),
+    ),
   });
 
   if (updatedUser.error || !updatedUser.result) {
@@ -116,26 +118,37 @@ export const DELETE = async (req: NextRequest) => {
 
   const parsedData = parseResponse.data;
 
-  const { result, error } = await getDocumentById(
-    "workshops",
-    parsedData.workshopId,
-  );
+  const workshop = await getDocumentById("workshops", parsedData.workshopId);
 
-  if (error || !result) {
+  if (workshop.error || !workshop.result) {
     return NextResponse.json(
       { message: "Error fetching data" },
       { status: 500 },
     );
   }
 
-  if (!result.exists()) {
+  if (!workshop.result.exists()) {
     return NextResponse.json(
       { message: "Workshop not found" },
       { status: 500 },
     );
   }
 
-  const workshopData = result.data() as Workshop;
+  const user = await getDocumentById("users", parsedData.userId);
+
+  if (user.error || !user.result) {
+    return NextResponse.json(
+      { message: "Error fetching data" },
+      { status: 500 },
+    );
+  }
+
+  if (!user.result.exists()) {
+    return NextResponse.json({ message: "User not found" }, { status: 500 });
+  }
+
+  const workshopData = workshop.result.data() as Workshop;
+  const userData = user.result.data() as User;
 
   if (!workshopData.users.includes(parsedData.userId)) {
     return NextResponse.json(
@@ -144,16 +157,35 @@ export const DELETE = async (req: NextRequest) => {
     );
   }
 
-  const update = await updateDocument("workshops", parsedData.workshopId, {
-    users: workshopData.users.filter((userId) => userId !== parsedData.userId),
-  });
+  const updatedWorkshop = await updateDocument(
+    "workshops",
+    parsedData.workshopId,
+    {
+      users: workshopData.users.filter(
+        (userId) => userId !== parsedData.userId,
+      ),
+    },
+  );
 
-  if (update.error || !update.result) {
+  if (updatedWorkshop.error || !updatedWorkshop.result) {
     return NextResponse.json(
       { message: "Error updating workshop" },
       { status: 500 },
     );
   }
 
-  return NextResponse.json(update);
+  const updatedUser = await updateDocument("users", parsedData.userId, {
+    workshops: userData.workshops.filter((workshopId) => {
+      workshopId != parsedData.workshopId;
+    }),
+  });
+
+  if (updatedUser.error || !updatedUser.result) {
+    return NextResponse.json(
+      { message: "Error updating user" },
+      { status: 500 },
+    );
+  }
+
+  return NextResponse.json(updatedUser, updatedWorkshop);
 };
