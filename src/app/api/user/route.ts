@@ -2,7 +2,6 @@ import { UserSchema } from "@/common/schema/user";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { getAllDocuments } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 as uuid } from "uuid";
 
 export const GET = async () => {
   const { result, error } = await getAllDocuments("users");
@@ -33,11 +32,14 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  const id = uuid();
-  const { result, error } = await createDocument("users", id, {
-    ...parseResponse.data,
-    workshops: [],
-  });
+  const { result, error } = await createDocument(
+    "users",
+    parseResponse.data.mobileNumber,
+    {
+      ...parseResponse.data,
+      workshops: [],
+    },
+  );
 
   if (error || !result) {
     return NextResponse.json(
@@ -46,5 +48,5 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  return NextResponse.json({ id, ...result });
+  return NextResponse.json(result);
 };
