@@ -43,7 +43,7 @@ export const POST = async (req: NextRequest) => {
 
   if (error || !result) {
     return NextResponse.json(
-      { message: "Error creating document" },
+      { message: "Error creating User" },
       { status: 500 },
     );
   }

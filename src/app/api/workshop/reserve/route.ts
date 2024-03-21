@@ -77,27 +77,11 @@ export const POST = async (req: NextRequest) => {
     },
   );
 
-  // TODO: investigate the result was undefined when the documents were updated successfully
-  // console.log(updatedWorkshop);
-  // if (updatedWorkshop.error || !updatedWorkshop.result) {
-  //   return NextResponse.json(
-  //     { message: "Error updating workshop" },
-  //     { status: 500 },
-  //   );
-  // }
-
   const updatedUser = await updateDocument("users", parsedData.userId, {
     workshops: Array.from(
       new Set([...userData.workshops, parsedData.workshopId]),
     ),
   });
-
-  // if (updatedUser.error || !updatedUser.result) {
-  //   return NextResponse.json(
-  //     { message: "Error updating user" },
-  //     { status: 500 },
-  //   );
-  // }
 
   return NextResponse.json({ updatedUser, updatedWorkshop });
 };
@@ -154,7 +138,7 @@ export const DELETE = async (req: NextRequest) => {
 
   if (!workshopData.users.includes(parsedData.userId)) {
     return NextResponse.json(
-      { message: "User has not already reserve the workshop" },
+      { message: "User has not reserve the workshop" },
       { status: 400 },
     );
   }
@@ -169,25 +153,11 @@ export const DELETE = async (req: NextRequest) => {
     },
   );
 
-  // if (updatedWorkshop.error || !updatedWorkshop.result) {
-  //   return NextResponse.json(
-  //     { message: "Error updating workshop" },
-  //     { status: 500 },
-  //   );
-  // }
-
   const updatedUser = await updateDocument("users", parsedData.userId, {
     workshops: userData.workshops.filter((workshopId) => {
       workshopId != parsedData.workshopId;
     }),
   });
-
-  // if (updatedUser.error || !updatedUser.result) {
-  //   return NextResponse.json(
-  //     { message: "Error updating user" },
-  //     { status: 500 },
-  //   );
-  // }
 
   return NextResponse.json({ updatedUser, updatedWorkshop });
 };
