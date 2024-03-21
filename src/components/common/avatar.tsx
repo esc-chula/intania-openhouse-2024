@@ -28,21 +28,21 @@ export default function Avatar({ option, className }: AvatarProps) {
       <Image
         src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
         alt="Avatar"
-        width={600}
+        width={900}
         height={1200}
         className="absolute"
       />
       <Image
         src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
         alt="Avatar"
-        width={600}
+        width={900}
         height={1200}
         className="absolute"
       />
       <Image
         src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
         alt="Avatar"
-        width={600}
+        width={900}
         height={1200}
         className="absolute"
       />
@@ -71,7 +71,7 @@ export default function Avatar({ option, className }: AvatarProps) {
         src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
         alt="Avatar"
         width={900}
-        height={400}
+        height={1200}
         className="absolute"
       />
     </div>

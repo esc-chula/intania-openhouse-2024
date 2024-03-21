@@ -27,7 +27,7 @@ export default function AvatarConfirm() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-between pb-9">
       <Header />
-      <div className="relative flex h-fit w-full flex-col items-center justify-center rounded-[30px] bg-button-glass pt-8 shadow-button-glass ring-[1.5px] ring-white ring-opacity-30">
+      <div className="relative flex h-fit w-full flex-col items-center justify-center rounded-[30px] bg-button-glass pt-8 shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 backdrop-blur-sm">
         <p className="absolute top-4 text-2xl font-bold">{name}</p>
         <Avatar option={option} className="h-96 w-72" />
       </div>

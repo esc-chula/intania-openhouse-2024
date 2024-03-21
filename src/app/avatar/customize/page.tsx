@@ -52,7 +52,7 @@ export default function AvatarCustomize() {
     <div className="flex h-full w-full flex-col items-center justify-between pb-9">
       <Header />
 
-      <div className="relative flex h-fit w-full flex-col items-center justify-center gap-6 rounded-[30px] bg-button-glass shadow-button-glass ring-[1.5px] ring-white ring-opacity-30">
+      <div className="relative flex h-fit w-full flex-col items-center justify-center gap-6 rounded-[30px] bg-button-glass shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 backdrop-blur-sm">
         <Avatar option={option} className="h-80 w-60" />
       </div>
 
@@ -78,22 +78,24 @@ export default function AvatarCustomize() {
           </Tab>
         </div>
         <div className="flex h-full w-full flex-wrap items-start overflow-scroll">
-          {optionImages[tab].map((optionImage: string) => (
-            <button
-              key={tab + optionImage}
-              onClick={() => handleOptionChange(tab, optionImage)}
-              className="w-1/3 object-cover"
-            >
-              <Image
-                src={`/assets/avatar/${tab}/${tab}-${optionImage}.PNG`}
+          {optionImages[tab as keyof typeof optionImages].map(
+            (optionImage: string) => (
+              <button
                 key={tab + optionImage}
-                alt=""
-                width={900}
-                height={1200}
-                style={{ objectFit: "cover" }}
-              />
-            </button>
-          ))}
+                onClick={() => handleOptionChange(tab, optionImage)}
+                className="w-1/3 object-cover"
+              >
+                <Image
+                  src={`/assets/avatar/${tab}/${tab}-${optionImage}.PNG`}
+                  key={tab + optionImage}
+                  alt=""
+                  width={900}
+                  height={1200}
+                  style={{ objectFit: "cover" }}
+                />
+              </button>
+            ),
+          )}
         </div>
       </div>
 
