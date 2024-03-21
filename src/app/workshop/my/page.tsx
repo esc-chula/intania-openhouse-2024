@@ -1,25 +1,51 @@
 "use client";
 
+import { User } from "@/common/types/user";
+import { Workshop } from "@/common/types/workshop";
 import { QRCodeSVG } from "qrcode.react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MyWorkshop() {
-  const workshops = [
-    {
-      id: "this-will-be-random-very-soon-1",
-      department: "ภาควิชาคอมพิวเตอร์",
-      date: "30/03/2024",
-      time: "13:00 - 14:30",
-      location: "ห้อง 18-16 อาคารเจริญวิศวกรรม (ตึก 4)",
-    },
-    {
-      id: "this-will-be-random-very-soon-2",
-      department: "ภาควิชาคอมพิวเตอร์",
-      date: "30/03/2024",
-      time: "13:00 - 14:30",
-      location: "ห้อง 18-16 อาคารเจริญวิศวกรรม (ตึก 4)",
-    },
-  ];
+  const [workshops, setWorkshops] = useState<Workshop[]>([]);
+  useEffect(() => {
+    const userFormData = localStorage.getItem("formData");
+    if (!userFormData) {
+      throw new Error("No formData in the local storage");
+    }
+    const userPhoneNumber = (JSON.parse(userFormData) as User).mobileNumber;
+
+    const fetchWorkshops = async () => {
+      try {
+        const userResponse = await fetch("/api/user/" + userPhoneNumber, {
+          method: "GET",
+        });
+        if (!userResponse) {
+          throw new Error("Cannot fetch user or User does not exist");
+        }
+
+        const userData = (await userResponse.json()) as User;
+        const workshopData = (await Promise.all(
+          userData.workshops.map(async (workshopId) => {
+            const response = await fetch("/api/workshop/" + workshopId, {
+              method: "GET",
+            });
+            if (!response) {
+              throw new Error(
+                "Cannot fetch workshop or Workshop does not exist",
+              );
+            }
+            return response.json();
+          }),
+        )) as Workshop[];
+
+        setWorkshops(workshopData);
+      } catch (error) {
+        console.error("Error fetching workshops:", error);
+      }
+    };
+
+    fetchWorkshops();
+  }, []);
 
   const [qr, setQr] = useState<string>("");
 
