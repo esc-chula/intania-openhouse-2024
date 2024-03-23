@@ -8,7 +8,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative">
         <input
-          className="peer h-10 w-[200px] rounded-[18px] bg-transparent bg-button-glass px-3.5 pt-1 text-[15px] font-bold text-white placeholder-transparent shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 backdrop-blur-sm focus:outline-none"
+          className={`peer w-[200px] bg-transparent bg-button-glass px-3.5 pt-1 text-[15px] font-bold text-white placeholder-transparent shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 backdrop-blur-sm duration-300 focus:h-14 focus:rounded-[24px] focus:outline-none ${props.value ? "h-14 rounded-[24px]" : "h-10 rounded-[18px]"}`}
           required
           ref={ref}
           {...props}
