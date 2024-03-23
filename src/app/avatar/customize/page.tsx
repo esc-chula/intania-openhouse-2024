@@ -1,5 +1,6 @@
 "use client";
 
+import Tab from "@/components/avatar/tab";
 import Avatar from "@/components/common/avatar";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
@@ -7,7 +8,6 @@ import { initialOption, optionImages } from "@/constants/avatar";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Tab from "../components/tab";
 
 export default function AvatarCustomize() {
   const [option, setOption] = useState(initialOption);

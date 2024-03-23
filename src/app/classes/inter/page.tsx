@@ -1,6 +1,6 @@
+import Class from "@/components/classes/class";
+import Selector from "@/components/classes/selector";
 import Header from "@/components/common/header";
-import Class from "../components/class";
-import Selector from "../components/selector";
 
 export default function InterClass() {
   return (
