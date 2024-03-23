@@ -1,10 +1,9 @@
 "use client";
 
-import Tab from "@/components/avatar/tab";
 import Avatar from "@/components/common/avatar";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
-import { initialOption, optionImages } from "@/constants/avatar";
+import { initialOption, optionImages, optionName } from "@/constants/avatar";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,11 +16,11 @@ export default function AvatarCustomize() {
     localStorage.setItem("option", JSON.stringify(option));
   }, [option]);
 
-  const zoomed = ["eyes", "eyebrows", "outer", "shirt"];
-
   const handleOptionChange = (tab: string, image: string) => {
     setOption({ ...option, [tab]: image });
   };
+
+  const zoomedOptions = ["eyes", "eyebrows", "outer", "shirt"];
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-between">
@@ -33,24 +32,15 @@ export default function AvatarCustomize() {
 
       <div className="mb-8 flex w-full flex-col items-center rounded-[30px] bg-button-solid shadow-button-solid">
         <div className="max-w flex w-full justify-between gap-6 overflow-x-scroll whitespace-nowrap px-6 py-3 text-sm font-bold text-secondary shadow-md shadow-black/5">
-          <Tab tab={tab} setTab={setTab} name="base">
-            ร่างกาย
-          </Tab>
-          <Tab tab={tab} setTab={setTab} name="hair">
-            ผม
-          </Tab>
-          <Tab tab={tab} setTab={setTab} name="eyes">
-            ตา
-          </Tab>
-          <Tab tab={tab} setTab={setTab} name="eyebrows">
-            คิ้ว
-          </Tab>
-          <Tab tab={tab} setTab={setTab} name="outer">
-            เสื้อคลุม
-          </Tab>
-          <Tab tab={tab} setTab={setTab} name="shirt">
-            เสื้อ
-          </Tab>
+          {Object.keys(optionImages).map((key) => (
+            <button
+              key={key}
+              onClick={() => setTab(key as keyof typeof optionImages)}
+              className={`${tab === key ? "text-primary" : "text-secondary"}`}
+            >
+              {optionName[key as keyof typeof optionName]}
+            </button>
+          ))}
         </div>
         <div className="flex h-full w-full flex-wrap items-start overflow-hidden rounded-b-[30px]">
           {optionImages[tab as keyof typeof optionImages].map(
@@ -68,7 +58,7 @@ export default function AvatarCustomize() {
                     fill
                     priority
                     loading="eager"
-                    className={`object-cover ${zoomed.includes(tab) ? "scale-150" : ""}`}
+                    className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
                     quality={10}
                   />
                 </div>
