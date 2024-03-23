@@ -17,7 +17,7 @@ export default function Name() {
   const isBlank = name === "";
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between pb-14 pt-5">
+    <div className="flex h-full w-full flex-col items-center justify-between pb-9">
       <Header />
       {stage === 1 ? (
         <div className="animate-fade-in">
