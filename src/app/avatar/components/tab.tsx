@@ -1,7 +1,9 @@
+import { optionImages } from "../customize/page";
+
 type TabProps = {
   tab: string;
-  setTab: (tab: string) => void;
-  name: string;
+  setTab: (tab: keyof typeof optionImages) => void;
+  name: keyof typeof optionImages;
   children: React.ReactNode;
 };
 
