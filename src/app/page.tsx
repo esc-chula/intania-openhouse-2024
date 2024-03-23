@@ -25,14 +25,10 @@ export default function Home() {
               เริ่มเลย!
             </Button>
           </Link>
+
           <Link href="/">
-            <Button variant="ghost" className="w-40">
-              Intania Tour
-            </Button>
-          </Link>
-          <Link href="/">
-            <Button variant="ghost" className="w-40">
-              CUIIC
+            <Button variant="ghost" className="w-52">
+              ลงทะเบียน Workshop
             </Button>
           </Link>
         </div>
