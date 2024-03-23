@@ -13,10 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        <label
-          htmlFor="name"
-          className="absolute left-3.5 top-1.5 text-[0.5rem] text-white transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal  peer-placeholder-shown:text-white peer-placeholder-shown:opacity-50 peer-focus:top-1.5  peer-focus:text-[0.5rem] peer-focus:text-white peer-focus:opacity-100"
-        >
+        <label className="pointer-events-none absolute left-3.5 top-1.5 text-[0.5rem] text-white transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-[15px] peer-placeholder-shown:font-normal  peer-placeholder-shown:text-white peer-placeholder-shown:opacity-50 peer-focus:top-1.5  peer-focus:text-[0.5rem] peer-focus:text-white peer-focus:opacity-100">
           {props.placeholder}
         </label>
       </div>
