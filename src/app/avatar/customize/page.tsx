@@ -3,41 +3,14 @@
 import Avatar from "@/components/common/avatar";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
+import { initialOption, optionImages } from "@/constants/avatar";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Tab from "../components/tab";
 
-export const optionImages = {
-  base: ["1", "2", "3", "4", "5"],
-  eyes: [
-    "1-black",
-    "1-blue",
-    "1-brown",
-    "1-green",
-    "1-grey",
-    "1-pink",
-    "4",
-    "5",
-    "6",
-  ],
-  eyebrows: ["1", "2", "3"],
-  shirt: ["1-black", "1-grey", "1-red", "1-white"],
-  outer: ["1"],
-  hair: ["1-brown"],
-};
-
 export default function AvatarCustomize() {
-  const [option, setOption] = useState({
-    base: optionImages.base[0],
-    eyes: optionImages.eyes[0],
-    eyebrows: optionImages.eyebrows[0],
-    hair: optionImages.hair[0],
-    shirt: optionImages.shirt[0],
-    shoes: "1",
-    pants: "1-jeans",
-    outer: optionImages.outer[0],
-  });
+  const [option, setOption] = useState(initialOption);
   const [tab, setTab] = useState<keyof typeof optionImages>("base");
 
   useEffect(() => {

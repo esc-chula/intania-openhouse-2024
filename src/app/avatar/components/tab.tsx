@@ -1,4 +1,4 @@
-import { optionImages } from "../customize/page";
+import { optionImages } from "@/constants/avatar";
 
 type TabProps = {
   tab: string;
