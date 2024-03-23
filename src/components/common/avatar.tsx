@@ -21,58 +21,50 @@ export default function Avatar({ option, className }: AvatarProps) {
       <Image
         src={`/assets/avatar/base/base-${option.base}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[1] object-contain"
       />
       <Image
         src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[2] object-contain"
       />
       <Image
         src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[3] object-contain"
       />
       <Image
         src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[4] object-contain"
       />
       <Image
         src={`/assets/avatar/shirt/shirt-${option.shirt}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[5] object-contain"
       />
       <Image
         src={`/assets/avatar/shoes/shoes-${option.shoes}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[6] object-contain"
       />
       <Image
         src={`/assets/avatar/pants/pants-${option.pants}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[7] object-contain"
       />
       <Image
         src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
         alt="Avatar"
-        width={900}
-        height={1200}
-        className="absolute"
+        fill
+        className="absolute z-[8] object-contain"
       />
     </div>
   );

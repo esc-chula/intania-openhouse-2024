@@ -1,16 +1,25 @@
+"use client";
+
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Classes() {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    return setName(localStorage.getItem("name") ?? "");
+  }, [name]);
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-between pb-9">
       <Header />
       <div className="flex items-center justify-center text-center">
         <p className="animate-fade-in text-2xl font-bold">
-          ทีนี้ก็เหมือนเด็กวิศวฯจุฬาฯแล้ว
+          ทีนี้ {name} ก็เหมือนเด็ก
           <br />
-          พร้อมแล้วหรือยังที่จะมาเรียนแบบวิศวฯกัน!
+          วิศวฯจุฬาฯแล้ว เราไปลองเรียนแบบวิศวฯกันดีกว่า!
         </p>
       </div>
       <Link href="/classes/thai">
