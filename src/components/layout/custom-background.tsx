@@ -19,6 +19,8 @@ export default function CustomBackground() {
     );
   }, [backgroundNumber, newBackgroundNumber]);
 
+  if (backgroundNumber === null) return null;
+
   return (
     <Image
       src={`/assets/background/background-${backgroundNumber}.webp`}
