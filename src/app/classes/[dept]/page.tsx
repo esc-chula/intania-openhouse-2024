@@ -1,28 +1,20 @@
-"use client";
-
-import Avatar from "@/components/common/avatar";
 import Header from "@/components/common/header";
+import LocalAvatar from "@/components/common/local-avatar";
 import Button from "@/components/ui/button";
+import Departments from "@/data/departments.json";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { FiShare } from "react-icons/fi";
 
-export default function Dept() {
-  const [option, setOption] = useState({
-    base: "1",
-    eyes: "1-black",
-    eyebrows: "1",
-    hair: "1-brown",
-    shirt: "1-black",
-    shoes: "1",
-    pants: "1-jeans",
-    outer: "1",
-  });
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
-  useEffect(() => {
-    setOption(JSON.parse(localStorage.getItem("option") ?? "{}"));
-  }, []);
+export async function generateStaticParams() {
+  return Departments.map((dept) => ({
+    dept: dept.id,
+  }));
+}
 
+export default function Dept({ params }: { params: { dept: string } }) {
   return (
     <>
       <Header back />
@@ -31,7 +23,7 @@ export default function Dept() {
           <div className="flex w-full px-2">
             <div className="relative flex h-[22rem] w-full rounded-[30px] bg-button-glass p-3 shadow-button-glass ring-[1.5px] ring-white ring-opacity-30">
               <div className="relative flex h-full w-full justify-center rounded-[18px] bg-[#D9D9D9]">
-                <Avatar option={option} className="h-80 w-80" />
+                <LocalAvatar />
               </div>
             </div>
           </div>

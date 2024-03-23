@@ -1,0 +1,135 @@
+[
+  {
+    "id": "civil",
+    "name": {
+      "th": "วิศวกรรมโยธา",
+      "en": "Civil Engineering"
+    }
+  },
+  {
+    "id": "elec",
+    "name": {
+      "th": "วิศวกรรมไฟฟ้า",
+      "en": "Electrical Engineering"
+    }
+  },
+  {
+    "id": "mech",
+    "name": {
+      "th": "วิศวกรรมเครื่องกล",
+      "en": "Mechanical Engineering"
+    }
+  },
+  {
+    "id": "auto",
+    "name": {
+      "th": "วิศวกรรมยานยนต์",
+      "en": "Automotive Engineering"
+    }
+  },
+  {
+    "id": "ie",
+    "name": {
+      "th": "วิศวกรรมอุตสาหการ",
+      "en": "Industrial Engineering"
+    }
+  },
+  {
+    "id": "env",
+    "name": {
+      "th": "วิศวกรรมสิ่งแวดล้อม",
+      "en": "Environmental Engineering"
+    }
+  },
+  {
+    "id": "mt",
+    "name": {
+      "th": "วิศวกรรมโลหการ",
+      "en": "Metallurgical Engineering"
+    }
+  },
+  {
+    "id": "pt",
+    "name": {
+      "th": "วิศวกรรมเหมืองแร่และปิโตรเลียม",
+      "en": "Mining and Petroleum Engineering"
+    }
+  },
+  {
+    "id": "nt",
+    "name": {
+      "th": "ภาควิชาวิศวกรรมนิวเคลียร์",
+      "en": "Nuclear Engineering"
+    }
+  },
+  {
+    "id": "sv",
+    "name": {
+      "th": "วิศวกรรมสำรวจ",
+      "en": "Survey Engineering"
+    }
+  },
+  {
+    "id": "che",
+    "name": {
+      "th": "วิศวกรรมเคมี",
+      "en": "Chemical Engineering"
+    }
+  },
+  {
+    "id": "cp",
+    "name": {
+      "th": "วิศวกรรมคอมพิวเตอร์",
+      "en": "Computer Engineering"
+    }
+  },
+  {
+    "id": "cedt",
+    "name": {
+      "th": "วิศวกรรมคอมพิวเตอร์และเทคโนโลยีดิจิทัล",
+      "en": "Computer and Digital Technology Engineering"
+    }
+  },
+  {
+    "id": "ai",
+    "name": {
+      "th": "วิศวกรรมหุ่นยนต์และปัญญาประดิษฐ์",
+      "en": "Robotics & AI"
+    }
+  },
+  {
+    "id": "ice",
+    "name": {
+      "th": "วิศวกรรมสารสนเทศและการสื่อสาร",
+      "en": "ICE"
+    }
+  },
+  {
+    "id": "nano",
+    "name": {
+      "th": "วิศวกรรมนาโน",
+      "en": "NANO"
+    }
+  },
+  {
+    "id": "adme",
+    "name": {
+      "th": "วิศวกรรมการออกแบบและการผลิตยานยนต์",
+      "en": "ADME"
+    }
+  },
+  {
+    "id": "aero",
+    "name": {
+      "th": "วิศวกรรมอากาศยาน",
+      "en": "AERO"
+    }
+  },
+  {
+    "id": "chpe",
+    "name": {
+      "th": "Chemical and Process Engineering",
+      "en": "ChPe"
+    }
+  }
+]
