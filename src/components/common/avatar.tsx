@@ -56,7 +56,7 @@ export default function Avatar({ option, className }: AvatarProps) {
           <img
             src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2Fshirt%2F${`${option.shirt.split("-")[0]}-${option.shirt.split("-")[1]}`}%2F${option.shirt.split("-")[2]}.png?alt=media`}
             alt="Avatar"
-            className={`absolute bottom-0 left-0 right-0 z-[${option.tucked ? 5 : 6}]`}
+            className={`absolute bottom-0 left-0 right-0 ${option.tucked ? "z-[5]" : "z-[6]"}`}
             loading="eager"
           />
         </picture>
@@ -66,7 +66,7 @@ export default function Avatar({ option, className }: AvatarProps) {
           <img
             src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2Fpants%2F${`${option.pants.split("-")[0]}-${option.pants.split("-")[1]}`}%2F${option.pants.split("-")[2]}.png?alt=media`}
             alt="Avatar"
-            className={`absolute bottom-0 left-0 right-0 z-[${option.tucked ? 6 : 5}]`}
+            className={`absolute bottom-0 left-0 right-0 ${option.tucked ? "z-[6]" : "z-[5]"}`}
           />
         </picture>
       )}
