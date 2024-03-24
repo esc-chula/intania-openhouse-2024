@@ -1,18 +1,10 @@
 "use client";
 
+import { initialOption } from "@/constants/avatar";
 import { cn } from "@/utils/cn";
 
 interface AvatarProps {
-  option: {
-    base: string;
-    eyes: string;
-    eyebrows: string;
-    hair: string;
-    shirt: string;
-    shoes: string;
-    pants: string;
-    outer: string;
-  };
+  option: typeof initialOption;
   className?: string;
 }
 
@@ -64,17 +56,7 @@ export default function Avatar({ option, className }: AvatarProps) {
           <img
             src={`/assets/avatar/shirt/${`${option.shirt.split("-")[0]}-${option.shirt.split("-")[1]}`}/${option.shirt.split("-")[2]}.png`}
             alt="Avatar"
-            className={`absolute bottom-0 left-0 right-0 z-[5]`}
-            loading="eager"
-          />
-        </picture>
-      )}
-      {option.shoes && (
-        <picture>
-          <img
-            src={`/assets/avatar/shoes/${`${option.shoes.split("-")[0]}-${option.shoes.split("-")[1]}`}/${option.shoes.split("-")[2]}.png`}
-            alt="Avatar"
-            className={`absolute bottom-0 left-0 right-0 z-[6]`}
+            className={`absolute bottom-0 left-0 right-0 z-[${option.tucked ? 5 : 6}]`}
             loading="eager"
           />
         </picture>
@@ -84,7 +66,17 @@ export default function Avatar({ option, className }: AvatarProps) {
           <img
             src={`/assets/avatar/pants/${`${option.pants.split("-")[0]}-${option.pants.split("-")[1]}`}/${option.pants.split("-")[2]}.png`}
             alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[${option.tucked ? 6 : 5}]`}
+          />
+        </picture>
+      )}
+      {option.shoes && (
+        <picture>
+          <img
+            src={`/assets/avatar/shoes/${`${option.shoes.split("-")[0]}-${option.shoes.split("-")[1]}`}/${option.shoes.split("-")[2]}.png`}
+            alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[7]`}
+            loading="eager"
           />
         </picture>
       )}

@@ -49,6 +49,19 @@ export default function AvatarCustomize() {
             </button>
           ))}
         </div>
+        {tab === "shirt" && (
+          <div className="z-10 flex w-full pl-3 pt-2 text-gray-500">
+            <input
+              type="checkbox"
+              checked={option.tucked}
+              onChange={(e) =>
+                setOption({ ...option, tucked: e.target.checked })
+              }
+              className="mr-2"
+            />
+            <p className="text-xs">เอาเสื้อไว้ในกางเกง</p>
+          </div>
+        )}
         <div className="flex h-full w-full flex-wrap items-start overflow-hidden rounded-b-[30px]">
           {canBeEmpty.includes(tab) && (
             <button
@@ -168,7 +181,7 @@ export default function AvatarCustomize() {
                           </div>
                           <div
                             onClick={() => setColorOptions([])}
-                            className="fixed bottom-0 left-0 right-0 top-0 z-40"
+                            className="fixed bottom-0 left-0 right-0 top-0 z-40 bg-black/10"
                           ></div>
                         </>
                       ) : null}

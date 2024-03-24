@@ -232,6 +232,7 @@ export const initialOption = {
   pants: `pants-5-${optionImages.pants["pants-5"][0]}`,
   outer: `outer-1-${optionImages.outer["outer-1"][0]}`,
   shoes: `shoes-1-${optionImages.shoes["shoes-1"][0]}`,
+  tucked: false,
 };
 
 export const zoomedOptions = ["eyes", "eyebrows", "outer", "shirt"];
