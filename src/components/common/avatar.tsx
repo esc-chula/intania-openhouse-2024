@@ -16,6 +16,41 @@ export default function Avatar({
 }: AvatarProps) {
   return (
     <div className={cn("relative w-full", className)}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="173"
+        height="61"
+        viewBox="0 0 173 61"
+        fill="none"
+        className="absolute bottom-[2%] left-1/2 z-0 -translate-x-1/2 transform"
+      >
+        <g opacity="0.18" filter="url(#filter0_f_212_52)">
+          <ellipse cx="86.5" cy="30.5" rx="74.5" ry="18.5" fill="black" />
+        </g>
+        <defs>
+          <filter
+            id="filter0_f_212_52"
+            x="0"
+            y="0"
+            width="173"
+            height="61"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="BackgroundImageFix"
+              result="shape"
+            />
+            <feGaussianBlur
+              stdDeviation="6"
+              result="effect1_foregroundBlur_212_52"
+            />
+          </filter>
+        </defs>
+      </svg>
       {option.base && (
         <picture>
           <img
