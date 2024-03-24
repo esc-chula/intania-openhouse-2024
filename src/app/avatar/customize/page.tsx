@@ -10,7 +10,6 @@ import {
   optionName,
   zoomedOptions,
 } from "@/constants/avatar";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineStop } from "react-icons/ai";
@@ -64,34 +63,39 @@ export default function AvatarCustomize() {
         )}
         <div className="flex h-full w-full flex-wrap items-start overflow-hidden rounded-b-[30px]">
           {canBeEmpty.includes(tab) && (
-            <button
-              onClick={() => handleOptionChange(tab, "")}
-              className={`-mb-1 grid aspect-[10/13] w-1/3 place-content-center ${option[tab as keyof typeof option] === "" ? "bg-black/5" : ""}`}
-            >
-              <AiOutlineStop className="text-3xl text-black/10" />
-            </button>
+            <div className={`relative aspect-[10/13] w-1/3 overflow-hidden`}>
+              <button
+                onClick={() => handleOptionChange(tab, "")}
+                className={`grid h-full w-full place-content-center ${option[tab as keyof typeof option] === "" ? "bg-black/5" : ""}`}
+              >
+                <AiOutlineStop className="text-3xl text-black/10" />
+              </button>
+            </div>
           )}
           {Array.isArray(optionImages[tab as keyof typeof optionImages])
             ? (optionImages[tab as keyof typeof optionImages] as string[]).map(
                 (optionImage) => (
-                  <button
+                  <div
                     key={tab + optionImage}
-                    onClick={() => handleOptionChange(tab, optionImage)}
-                    className={`-mb-1 aspect-[10/13] w-1/3 ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
+                    className={`relative aspect-[10/13] w-1/3 overflow-hidden`}
                   >
-                    <div className="relative h-full">
-                      <Image
-                        src={`/assets/avatar/${tab}/${optionImage}.png`}
-                        key={tab + optionImage}
-                        alt=""
-                        fill
-                        priority
-                        loading="eager"
-                        className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
-                        quality={10}
-                      />
-                    </div>
-                  </button>
+                    <button
+                      onClick={() => handleOptionChange(tab, optionImage)}
+                      className={`h-full w-full ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
+                    >
+                      <div className="relative h-full">
+                        <picture>
+                          <img
+                            src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2F${tab}%2F${optionImage}.png?alt=media`}
+                            key={tab + optionImage}
+                            alt=""
+                            loading="eager"
+                            className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
+                          />
+                        </picture>
+                      </div>
+                    </button>
+                  </div>
                 ),
               )
             : Object.keys(optionImages[tab as keyof typeof optionImages]).map(
@@ -105,7 +109,7 @@ export default function AvatarCustomize() {
                   return (
                     <div
                       key={tab + key}
-                      className="relative aspect-[10/13] w-1/3"
+                      className={`relative aspect-[10/13] w-1/3 overflow-hidden`}
                     >
                       <button
                         onClick={() => {
@@ -118,19 +122,18 @@ export default function AvatarCustomize() {
                           setColorOptions([]);
                           handleOptionChange(tab, `${key}-${subOptions[0]}`);
                         }}
-                        className={`relative -mb-1 h-full w-full ${option[tab as keyof typeof option] === `${key}-${subOptions[0]}` ? "bg-black/5" : ""}`}
+                        className={`relative h-full w-full ${option[tab as keyof typeof option] === `${key}-${subOptions[0]}` ? "bg-black/5" : ""}`}
                       >
                         <div className="relative h-full">
-                          <Image
-                            src={`/assets/avatar/${tab}/${key}/${subOptions[0]}.png`}
-                            key={tab + key}
-                            alt=""
-                            fill
-                            priority
-                            loading="eager"
-                            className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
-                            quality={10}
-                          />
+                          <picture>
+                            <img
+                              src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2F${tab}%2F${key}%2F${subOptions[0]}.png?alt=media`}
+                              key={tab + key}
+                              alt=""
+                              loading="eager"
+                              className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
+                            />
+                          </picture>
                         </div>
                       </button>
                       {colorOptions.length > 0 &&
@@ -168,7 +171,7 @@ export default function AvatarCustomize() {
                                 <div className="relative h-full">
                                   <picture>
                                     <img
-                                      src={`/assets/avatar/${tab}/${key}/${colorOption}.png`}
+                                      src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2F${tab}%2F${key}%2F${colorOption}.png?alt=media`}
                                       key={tab + key}
                                       alt=""
                                       loading="eager"
