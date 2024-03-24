@@ -1,10 +1,14 @@
 import ClassCard from "@/components/common/class-card";
+import { interDepartment } from "@/constants/departments";
+import Deparments from "@/data/departments.json";
 
-export default function ThaiClass() {
+export default function InterClass() {
   return (
-    <div className="my-4 grid w-full grid-cols-2 gap-5 overflow-y-scroll py-4">
-      {Array.from({ length: 15 }, (_, index) => (
-        <ClassCard key={index}></ClassCard>
+    <div className="my-4 grid w-full grid-cols-1 gap-5 overflow-y-scroll py-4">
+      {Deparments.filter(
+        (department) => !interDepartment.includes(department.id),
+      ).map((department) => (
+        <ClassCard key={department.id} department={department} />
       ))}
     </div>
   );

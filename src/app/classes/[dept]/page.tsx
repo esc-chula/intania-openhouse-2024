@@ -14,7 +14,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Dept({ params }: { params: { dept: string } }) {
+export default function DepartmentPage({
+  params,
+}: {
+  params: { dept: string };
+}) {
+  const department = Departments.find((d) => d.id === params.dept);
+
   return (
     <>
       <Header back />
@@ -30,7 +36,7 @@ export default function Dept({ params }: { params: { dept: string } }) {
           <div className="flex w-full flex-col gap-1.5">
             <h1 className="text-4xl font-bold">วิชาคอมป้อก</h1>
             <h2 className="text-xl font-bold opacity-80">
-              สาชาวิชาวิศวะกรรมคอมพิวเตอร์
+              สาชาวิชา{department?.name.th}
             </h2>
           </div>
           <div>
