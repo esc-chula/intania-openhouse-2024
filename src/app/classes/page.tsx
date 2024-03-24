@@ -17,7 +17,7 @@ export default function Classes() {
       <Header />
       <div className="flex items-center justify-center text-center">
         <p className="animate-fade-in text-2xl font-bold">
-          ทีนี้ {name} ก็เหมือนเด็ก
+          ตอนนี้ {name} ก็เหมือนเด็ก
           <br />
           วิศวฯจุฬาฯแล้ว ทีนี้พร้อมที่จะไปลองเรียนแบบวิศวฯแล้วหรือยัง!
         </p>
