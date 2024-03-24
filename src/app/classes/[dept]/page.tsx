@@ -1,12 +1,10 @@
 import Header from "@/components/common/header";
 import LocalAvatar from "@/components/common/local-avatar";
 import ShareButton from "@/components/common/share-button";
-import ShareImage from "@/components/common/share-image";
 import Button from "@/components/ui/button";
 import Departments from "@/data/departments.json";
 import Link from "next/link";
 
-export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -24,7 +22,6 @@ export default function DepartmentPage({
 
   return (
     <>
-      <ShareImage id="sharePicture" className="top-[-2000px]" />
       <Header back />
       <div className="flex flex-col space-y-8 pb-8">
         <div className="flex w-full flex-col items-center gap-7">

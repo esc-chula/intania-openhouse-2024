@@ -1,3 +1,5 @@
+"use client";
+
 import { optionImages } from "@/constants/avatar";
 import { cn } from "@/utils/cn";
 
@@ -24,6 +26,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/base/base-${option.base}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[1]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -33,6 +36,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[2]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -42,6 +46,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[3]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -51,6 +56,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[4]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -60,6 +66,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/shirt/shirt-${option.shirt}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[5]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -69,6 +76,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/shoes/shoes-${option.shoes}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[6]`}
+            loading="eager"
           />
         </picture>
       )}
@@ -87,6 +95,7 @@ export default function Avatar({ option, className }: AvatarProps) {
             src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[8]`}
+            loading="eager"
           />
         </picture>
       )}

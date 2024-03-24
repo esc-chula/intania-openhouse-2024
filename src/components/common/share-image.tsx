@@ -2,7 +2,6 @@
 
 import Header from "@/components/common/header";
 import LocalAvatar from "@/components/common/local-avatar";
-import CustomBackground from "@/components/layout/custom-background";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -14,6 +13,8 @@ export default function ShareImage({
   id?: string;
   className: string;
 }) {
+  const newBackgroundNumber = Math.floor(Math.random() * 3) + 1;
+
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function ShareImage({
     <div
       id={id}
       className={twMerge(
-        "bg-red-5003 fixed left-0 top-0 z-50 h-[1920px] w-[1080px] overflow-hidden",
+        "fixed left-0 top-0 z-50 h-[1920px] w-[1080px] overflow-hidden",
         className,
       )}
     >
@@ -56,7 +57,12 @@ export default function ShareImage({
           </div>
         </div>
       </div>
-      <CustomBackground />
+      <Image
+        src={`/assets/background/background-${newBackgroundNumber}.webp`}
+        alt="Background"
+        fill
+        className="select-none object-cover"
+      />
     </div>
   );
 }
