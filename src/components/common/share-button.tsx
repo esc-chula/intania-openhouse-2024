@@ -10,7 +10,10 @@ export default function ShareButton() {
       variant="ghost"
       className=" w-36"
       onClick={() => {
-        html2canvas(document.querySelector("#sharePicture")!).then((canvas) => {
+        html2canvas(document.querySelector("#sharePicture")!, {
+          allowTaint: true,
+          useCORS: true,
+        }).then((canvas) => {
           const dataURL = canvas.toDataURL("image/png");
           const a = document.createElement("a");
           a.href = dataURL;
