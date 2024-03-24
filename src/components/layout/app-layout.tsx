@@ -1,4 +1,4 @@
-import Image from "next/image";
+import CustomBackground from "./custom-background";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const backgroundNumber = Math.floor(Math.random() * 3) + 1;
@@ -11,12 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             {children}
           </div>
           <div className="absolute z-0 h-full w-full">
-            <Image
-              src={`/assets/background/background-${backgroundNumber}.webp`}
-              alt="Background"
-              fill
-              className="select-none object-cover"
-            />
+            <CustomBackground />
           </div>
         </div>
       </div>

@@ -15,11 +15,11 @@ export default function PageSwitcher({
   const pathname = usePathname();
 
   return (
-    <div className="flex justify-between space-x-4 px-3">
+    <div className="flex justify-between space-x-5 px-2">
       {links.map((link) => (
         <Link key={link.href} href={link.href} className="w-full">
           <Button
-            className="h-11 w-full rounded-3xl"
+            className="w-full"
             variant={pathname === link.href ? "default" : "ghost"}
           >
             {link.text}

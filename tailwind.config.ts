@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#D52941",
+        secondary: "#939393",
       },
       backgroundImage: {
         "button-solid": "linear-gradient(180deg, #FFF 0%, #F6DBDB 100%)",
@@ -31,9 +32,8 @@ const config: Config = {
         },
       },
       animation: {
-        "fade-in": "fade-in 0.5s ease-in-out",
-        "fade-out": "fade-out 0.5s ease-in-out",
-        "fade-in-out": "fade-in 0.5s ease-in-out, fade-out 0.5s ease-in-out 3s",
+        "fade-in": "fade-in 0.3s ease-in-out",
+        "fade-out": "fade-out 0.3s ease-in-out",
       },
     },
   },

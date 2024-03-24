@@ -18,6 +18,8 @@ export default function Register() {
     mobileNumber: "",
     email: "",
     guardianPhone: "",
+    workshops: [],
+    tours: [],
   });
 
   useEffect(() => {
@@ -130,44 +132,6 @@ export default function Register() {
             placeholder="เบอร์โทรศัพท์ผู้ปกครอง"
             required
           />
-
-          {/* 
-            <input
-              type="text"
-              name="academicYear"
-              value={formData.academicYear}
-              onChange={handleChange}
-              placeholder="ปีการศึกษา"
-              className="input"
-            />
-          
-            <input
-              type="text"
-              name="course"
-              value={formData.course}
-              onChange={handleChange}
-              placeholder="หลักสูตร"
-              className="input"
-            />
-          
-            <input
-              type="text"
-              name="school"
-              value={formData.school}
-              onChange={handleChange}
-              placeholder="โรงเรียน"
-              className="input"
-            />
-          
-            <input
-              type="text"
-              name="howFound"
-              value={formData.howFound}
-              onChange={handleChange}
-              placeholder="รู้จักงานนี้จากที่ไหน"
-              className="input"
-            />
-          */}
 
           <Button type="submit"> ไปต่อ </Button>
         </form>
