@@ -53,7 +53,7 @@ export default function Name() {
       ) : (
         <>
           <p id="welcome" className="animate-fade-in pb-20 text-2xl font-bold">
-            ขอให้เรารู้จักชื่อคุณหน่อยย...
+            ขอให้เรารู้จักชื่อหน่อยสิ...
           </p>
           <div></div>
         </>
