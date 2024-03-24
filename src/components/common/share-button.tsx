@@ -88,9 +88,9 @@ export default function ShareButton({
           </div>
         </div>
       </div>
-      <Button variant="ghost" className=" w-36" onClick={screenshot}>
+      <Button variant="default" className="w-44" onClick={screenshot}>
         <FiShare className="mr-2.5 h-[18px] w-[18px]" />
-        แชร์
+        แชร์ลงไอจี!
       </Button>
     </>
   );
