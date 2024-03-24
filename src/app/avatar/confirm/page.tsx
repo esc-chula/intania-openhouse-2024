@@ -31,9 +31,9 @@ export default function AvatarConfirm() {
         <p className="absolute top-4 text-2xl font-bold">{name}</p>
         <Avatar option={option} className="h-96 w-72" />
       </div>
-      <div>
-        <p className="mb-4 text-center text-sm font-bold">
-          พร้อมแล้วใช่มั้ย ลุย!
+      <div className="flex flex-col items-center space-y-4">
+        <p className="text-center text-sm font-bold">
+          พร้อมแล้วใช่มั้ย ไปกันต่อ~~
         </p>
         <Link href="/classes">
           <Button size="default" className="w-36">

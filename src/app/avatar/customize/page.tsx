@@ -28,7 +28,7 @@ export default function AvatarCustomize() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between">
+    <div className="flex h-full w-full flex-col items-center">
       <Header />
 
       <div className="relative mb-8 flex h-fit w-full flex-col items-center justify-center gap-6 rounded-[30px] bg-button-glass shadow-button-glass ring-[1.5px] ring-white ring-opacity-30 backdrop-blur-sm">
@@ -51,7 +51,7 @@ export default function AvatarCustomize() {
           {canBeEmpty.includes(tab) && (
             <button
               onClick={() => handleOptionChange(tab, "")}
-              className={`-mb-1 grid h-40 w-1/3 place-content-center ${option[tab as keyof typeof option] === "" ? "bg-black/5" : ""}`}
+              className={`-mb-1 grid aspect-[10/13] w-1/3 place-content-center ${option[tab as keyof typeof option] === "" ? "bg-black/5" : ""}`}
             >
               <AiOutlineStop className="text-3xl text-black/10" />
             </button>
@@ -61,7 +61,7 @@ export default function AvatarCustomize() {
               <button
                 key={tab + optionImage}
                 onClick={() => handleOptionChange(tab, optionImage)}
-                className={`-mb-1 h-40 w-1/3 ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
+                className={`-mb-1 aspect-[10/13] w-1/3 ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
               >
                 <div className="relative h-full">
                   <Image

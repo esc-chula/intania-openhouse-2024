@@ -19,7 +19,7 @@ export default function Classes() {
         <p className="animate-fade-in text-2xl font-bold">
           ทีนี้ {name} ก็เหมือนเด็ก
           <br />
-          วิศวฯจุฬาฯแล้ว เราไปลองเรียนแบบวิศวฯกัน!
+          วิศวฯจุฬาฯแล้ว ทีนี้พร้อมที่จะไปลองเรียนแบบวิศวฯแล้วหรือยัง!
         </p>
       </div>
       <Link href="/classes/thai">

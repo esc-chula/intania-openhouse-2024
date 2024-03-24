@@ -4,12 +4,12 @@ import { initialOption } from "@/constants/avatar";
 import { useEffect, useState } from "react";
 import Avatar from "./avatar";
 
-export default function LocalAvatar() {
+export default function LocalAvatar({ className }: { className?: string }) {
   const [option, setOption] = useState(initialOption);
 
   useEffect(() => {
     setOption(JSON.parse(localStorage.getItem("option") ?? "{}"));
   }, []);
 
-  return <Avatar option={option} className="h-80 w-80" />;
+  return <Avatar option={option} className={className} />;
 }

@@ -1,6 +1,5 @@
 import { optionImages } from "@/constants/avatar";
 import { cn } from "@/utils/cn";
-import Image from "next/image";
 
 interface AvatarProps {
   option: {
@@ -18,70 +17,78 @@ interface AvatarProps {
 
 export default function Avatar({ option, className }: AvatarProps) {
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative w-full", className)}>
       {option.base && (
-        <Image
-          src={`/assets/avatar/base/base-${option.base}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[1] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/base/base-${option.base}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[1]`}
+          />
+        </picture>
       )}
       {option.eyes && (
-        <Image
-          src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[2] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[2]`}
+          />
+        </picture>
       )}
       {option.eyebrows && (
-        <Image
-          src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[3] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[3]`}
+          />
+        </picture>
       )}
       {option.hair && (
-        <Image
-          src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[4] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[4]`}
+          />
+        </picture>
       )}
       {option.shirt && (
-        <Image
-          src={`/assets/avatar/shirt/shirt-${option.shirt}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[5] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/shirt/shirt-${option.shirt}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[5]`}
+          />
+        </picture>
       )}
       {option.shoes && (
-        <Image
-          src={`/assets/avatar/shoes/shoes-${option.shoes}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[6] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/shoes/shoes-${option.shoes}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[6]`}
+          />
+        </picture>
       )}
       {option.pants && (
-        <Image
-          src={`/assets/avatar/pants/pants-${option.pants}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[7] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/pants/pants-${option.pants}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[7]`}
+          />
+        </picture>
       )}
       {option.outer && (
-        <Image
-          src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
-          alt="Avatar"
-          fill
-          className="absolute z-[8] object-contain"
-        />
+        <picture>
+          <img
+            src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[8]`}
+          />
+        </picture>
       )}
     </div>
   );

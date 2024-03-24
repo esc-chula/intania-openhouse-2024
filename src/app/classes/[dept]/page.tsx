@@ -1,9 +1,10 @@
 import Header from "@/components/common/header";
 import LocalAvatar from "@/components/common/local-avatar";
+import ShareButton from "@/components/common/share-button";
+import ShareImage from "@/components/common/share-img";
 import Button from "@/components/ui/button";
 import Departments from "@/data/departments.json";
 import Link from "next/link";
-import { FiShare } from "react-icons/fi";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -23,11 +24,12 @@ export default function DepartmentPage({
 
   return (
     <>
+      <ShareImage id="sharePicture" className="top-[-2000px]" />
       <Header back />
       <div className="flex flex-col space-y-8 pb-8">
         <div className="flex w-full flex-col items-center gap-7">
           <div className="flex w-full px-2">
-            <div className="relative flex h-[22rem] w-full rounded-[30px] bg-button-glass p-3 shadow-button-glass ring-[1.5px] ring-white ring-opacity-30">
+            <div className="relative flex aspect-[10/12] w-full rounded-[30px] bg-button-glass p-3 shadow-button-glass ring-[1.5px] ring-white ring-opacity-30">
               <div className="relative flex h-full w-full justify-center rounded-[18px] bg-[#D9D9D9]">
                 <LocalAvatar />
               </div>
@@ -57,10 +59,7 @@ export default function DepartmentPage({
               จอง Workshop
             </Button>
           </Link>
-          <Button variant="ghost" className=" w-36">
-            <FiShare className="mr-2.5 h-[18px]  w-[18px]" />
-            แชร์
-          </Button>
+          <ShareButton />
         </div>
       </div>
     </>
