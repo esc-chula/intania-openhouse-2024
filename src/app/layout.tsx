@@ -1,5 +1,6 @@
 import AppLayout from "@/components/layout/app-layout";
 import { lineSeedSansTh } from "@/utils/fonts";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={lineSeedSansTh.className}>
         <AppLayout>{children}</AppLayout>
       </body>
+      <GoogleAnalytics gaId={process.env.GA_ID!} />
     </html>
   );
 }
