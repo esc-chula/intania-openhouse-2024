@@ -7,7 +7,7 @@ import { Select } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 
 export default function ReserveWorkshop() {
-  const { mobileNumber } = JSON.parse(localStorage.getItem("formData") ?? "{}");
+  const [mobileNumber, setMobileNumber] = useState<string>("");
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
 
@@ -22,6 +22,9 @@ export default function ReserveWorkshop() {
   const [selectedTourId, setSelectedTourId] = useState<string>("");
 
   useEffect(() => {
+    const formData = JSON.parse(localStorage.getItem("formData") ?? "{}");
+    setMobileNumber(formData.mobileNumber);
+
     const fetchWorkshops = async () => {
       try {
         const response = await fetch("/api/workshop");
