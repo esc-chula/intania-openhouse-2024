@@ -36,7 +36,7 @@ export default function AvatarCustomize() {
       </div>
 
       <div className="mb-8 flex w-full flex-col items-center rounded-[30px] bg-button-solid shadow-button-solid">
-        <div className="max-w flex w-full justify-between gap-6 overflow-x-scroll whitespace-nowrap px-6 py-3 text-sm font-bold text-secondary shadow-md shadow-black/5">
+        <div className="max-w flex w-full justify-between gap-6 overflow-x-scroll whitespace-nowrap rounded-t-[30px] px-6 py-3 text-sm font-bold text-secondary shadow-md shadow-black/5">
           {Object.keys(optionImages).map((key) => (
             <button
               key={key}

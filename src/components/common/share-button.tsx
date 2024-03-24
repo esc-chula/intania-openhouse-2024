@@ -11,10 +11,11 @@ export default function ShareButton() {
       className=" w-36"
       onClick={() => {
         html2canvas(document.querySelector("#sharePicture")!).then((canvas) => {
-          const link = document.createElement("a");
-          link.href = canvas.toDataURL();
-          link.download = "intania-open-house-2024.png";
-          link.click();
+          const dataURL = canvas.toDataURL("image/png");
+          const a = document.createElement("a");
+          a.href = dataURL;
+          a.download = "intania-open-house-2024.png";
+          a.click();
         });
       }}
     >
