@@ -3,6 +3,7 @@ import LocalAvatar from "@/components/common/local-avatar";
 import ShareButton from "@/components/common/share-button";
 import Button from "@/components/ui/button";
 import Departments from "@/data/departments.json";
+import Informations from "@/data/informations.json";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -23,7 +24,6 @@ export default function DepartmentPage({
 
   if (!department) {
     notFound();
-    return null;
   }
 
   return (
@@ -45,15 +45,14 @@ export default function DepartmentPage({
             </h2>
           </div>
           <div>
-            <p className="opacity-80">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p
+              className="opacity-80"
+              dangerouslySetInnerHTML={{
+                __html:
+                  Informations.find((info) => info.id === department.id)
+                    ?.intro || "",
+              }}
+            ></p>
           </div>
         </div>
         <div className="flex flex-col items-center gap-5">

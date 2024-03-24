@@ -37,7 +37,7 @@ export default function ShareButton({
     <>
       <div
         ref={shareRef}
-        className="pointer-events-none fixed -top-[000px] left-0 overflow-hidden"
+        className="pointer-events-none fixed -top-[1000px] left-0 overflow-hidden"
       >
         <div className="relative aspect-[9/16] h-[1000px]">
           <div className="absolute z-10 flex h-full w-full flex-col pt-6">
