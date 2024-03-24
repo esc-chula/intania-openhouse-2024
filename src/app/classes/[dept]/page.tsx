@@ -4,6 +4,7 @@ import ShareButton from "@/components/common/share-button";
 import Button from "@/components/ui/button";
 import Departments from "@/data/departments.json";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const dynamicParams = false;
 
@@ -19,6 +20,11 @@ export default function DepartmentPage({
   params: { dept: string };
 }) {
   const department = Departments.find((d) => d.id === params.dept);
+
+  if (!department) {
+    notFound();
+    return null;
+  }
 
   return (
     <>
@@ -56,7 +62,7 @@ export default function DepartmentPage({
               จอง Workshop
             </Button>
           </Link>
-          <ShareButton />
+          <ShareButton department={department} />
         </div>
       </div>
     </>

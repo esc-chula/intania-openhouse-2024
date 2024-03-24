@@ -3,133 +3,228 @@
     "id": "civil",
     "name": {
       "th": "วิศวกรรมโยธา",
-      "en": "Civil Engineering"
-    }
+      "en": "Civil Engineering",
+      "short": "โย"
+    },
+    "background": "9",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "elec",
     "name": {
       "th": "วิศวกรรมไฟฟ้า",
-      "en": "Electrical Engineering"
-    }
+      "en": "Electrical Engineering",
+      "short": "ไฟ"
+    },
+    "background": "19",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "mech",
     "name": {
       "th": "วิศวกรรมเครื่องกล",
-      "en": "Mechanical Engineering"
-    }
+      "en": "Mechanical Engineering",
+      "short": "เครื่อง"
+    },
+    "background": "23",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "auto",
     "name": {
       "th": "วิศวกรรมยานยนต์",
-      "en": "Automotive Engineering"
-    }
+      "en": "Automotive Engineering",
+      "short": "ยานยนต์"
+    },
+    "background": "22",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "ie",
     "name": {
       "th": "วิศวกรรมอุตสาหการ",
-      "en": "Industrial Engineering"
-    }
+      "en": "Industrial Engineering",
+      "short": "อุต"
+    },
+    "background": "16",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "env",
     "name": {
       "th": "วิศวกรรมสิ่งแวดล้อม",
-      "en": "Environmental Engineering"
-    }
+      "en": "Environmental Engineering",
+      "short": "สิ่ง"
+    },
+    "background": "24",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "mt",
     "name": {
       "th": "วิศวกรรมโลหการ",
-      "en": "Metallurgical Engineering"
-    }
+      "en": "Metallurgical Engineering",
+      "short": "โล"
+    },
+    "background": "2",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "pt",
     "name": {
       "th": "วิศวกรรมเหมืองแร่และปิโตรเลียม",
-      "en": "Mining and Petroleum Engineering"
-    }
+      "en": "Mining and Petroleum Engineering",
+      "short": "ปิโตร"
+    },
+    "background": "25",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "nt",
     "name": {
       "th": "ภาควิชาวิศวกรรมนิวเคลียร์",
-      "en": "Nuclear Engineering"
-    }
+      "en": "Nuclear Engineering",
+      "short": "นิวเคลียร์"
+    },
+    "background": "5",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "sv",
     "name": {
       "th": "วิศวกรรมสำรวจ",
-      "en": "Survey Engineering"
-    }
+      "en": "Survey Engineering",
+      "short": "สำรวจ"
+    },
+    "background": "26",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "che",
     "name": {
       "th": "วิศวกรรมเคมี",
-      "en": "Chemical Engineering"
-    }
+      "en": "Chemical Engineering",
+      "short": "เคมี"
+    },
+    "background": "8",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "cp",
     "name": {
       "th": "วิศวกรรมคอมพิวเตอร์",
-      "en": "Computer Engineering"
-    }
+      "en": "Computer Engineering",
+      "short": "คอม"
+    },
+    "background": "13",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "cedt",
     "name": {
       "th": "วิศวกรรมคอมพิวเตอร์และเทคโนโลยีดิจิทัล",
-      "en": "Computer and Digital Technology Engineering"
-    }
+      "en": "Computer and Digital Technology Engineering",
+      "short": "CEDT"
+    },
+    "background": "18",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "ai",
     "name": {
       "th": "วิศวกรรมหุ่นยนต์และปัญญาประดิษฐ์",
-      "en": "Robotics & AI"
-    }
+      "en": "Robotics & AI",
+      "short": "AI"
+    },
+    "background": "21",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "ice",
     "name": {
       "th": "วิศวกรรมสารสนเทศและการสื่อสาร",
-      "en": "ICE"
-    }
+      "en": "ICE",
+      "short": "ICE"
+    },
+    "background": "10",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "nano",
     "name": {
       "th": "วิศวกรรมนาโน",
-      "en": "NANO"
-    }
+      "en": "NANO",
+      "short": "NANO"
+    },
+    "background": "17",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "adme",
     "name": {
       "th": "วิศวกรรมการออกแบบและการผลิตยานยนต์",
-      "en": "ADME"
-    }
+      "en": "ADME",
+      "short": "ADME"
+    },
+    "background": "11",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "aero",
     "name": {
       "th": "วิศวกรรมอากาศยาน",
-      "en": "AERO"
-    }
+      "en": "AERO",
+      "short": "AERO"
+    },
+    "background": "15",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   },
   {
     "id": "chpe",
     "name": {
       "th": "Chemical and Process Engineering",
-      "en": "ChPe"
-    }
+      "en": "ChPe",
+      "short": "ChPe"
+    },
+    "background": "7",
+    "quote": "ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง",
+    "subject": "",
+    "description": ""
   }
 ]

@@ -1,16 +1,18 @@
 "use client";
 
+import Departments from "@/data/departments.json";
 import html2canvas from "html2canvas";
 import { useEffect, useRef, useState } from "react";
 import { FiShare } from "react-icons/fi";
 import Button from "../ui/button";
 import Header from "./header";
 import LocalAvatar from "./local-avatar";
-import ShareImage from "./share-image";
 
-export default function ShareButton() {
-  const newBackgroundNumber = Math.floor(Math.random() * 3) + 1;
-
+export default function ShareButton({
+  department,
+}: {
+  department: (typeof Departments)[number];
+}) {
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -33,12 +35,9 @@ export default function ShareButton() {
 
   return (
     <>
-      <div ref={shareRef}>
-        <ShareImage className="top-[-2000px]" />
-      </div>
       <div
         ref={shareRef}
-        className="pointer-events-none fixed -top-[1000px] left-0 overflow-hidden"
+        className="pointer-events-none fixed -top-[000px] left-0 overflow-hidden"
       >
         <div className="relative aspect-[9/16] h-[1000px]">
           <div className="absolute z-10 flex h-full w-full flex-col pt-6">
@@ -61,10 +60,10 @@ export default function ShareButton() {
                 </div>
               </div>
               <div className="flex scale-110 flex-col items-center gap-3">
-                <p className="text-3xl font-bold">{name} 0.5 ICE</p>
-                <p className="text-xl font-bold">
-                  ลานเกียร์ก็สะดุด ชอบเขียนโค้ดสุด ๆ ก็เราไง
+                <p className="text-3xl font-bold">
+                  {name} 0.5 {department.name.short}
                 </p>
+                <p className="text-xl font-bold">{department.quote}</p>
               </div>
               <div className="flex scale-110 flex-col items-center space-y-2">
                 <p className="text-xl font-bold opacity-80">
@@ -79,7 +78,7 @@ export default function ShareButton() {
           <div className="absolute h-full w-full">
             <picture className="">
               <img
-                src={`/assets/background/background-${newBackgroundNumber}.webp`}
+                src={`/assets/background/background-${department.background}.webp`}
                 alt="background"
                 height={1920}
                 width={1080}
