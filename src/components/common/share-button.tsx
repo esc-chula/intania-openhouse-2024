@@ -45,7 +45,7 @@ export default function ShareButton({
             <div className="flex w-full flex-col items-center space-y-[48px] pt-6">
               <div className="relative flex h-[540px] w-full items-center justify-center">
                 <div className="absolute bottom-1 left-14 right-14 top-1 z-10 flex items-end justify-center rounded-[18px] bg-gray-300">
-                  <LocalAvatar className="scale-90" />
+                  <LocalAvatar className="scale-90" useLocalImage />
                 </div>
                 <div className="absolute scale-[1.15]">
                   <picture>
@@ -78,7 +78,7 @@ export default function ShareButton({
           <div className="absolute h-full w-full">
             <picture className="">
               <img
-                src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/background%2Fbackground-${department.background}.webp?alt=media`}
+                src={`/assets/background/background-${department.background}.webp`}
                 alt="background"
                 height={1920}
                 width={1080}
