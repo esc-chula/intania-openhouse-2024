@@ -19,6 +19,7 @@ export default function Register() {
     email: "",
     guardianPhone: "",
     workshops: [],
+    tours: [],
   });
 
   useEffect(() => {
