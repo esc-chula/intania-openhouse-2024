@@ -3,8 +3,9 @@ import firebase_app from "../config";
 
 const db = getFirestore(firebase_app);
 
-export const deleteDocument = async (colllection: string, id: string) => {
-  const docRef = doc(db, colllection, id);
+export const deleteDocument = async (collectionName: string, id: string) => {
+  const name = `${process.env.NODE_ENV === "production" ? "prod" : "dev"}_${collectionName}`;
+  const docRef = doc(db, name, id);
 
   try {
     await setDoc(docRef, {}, { merge: true });
