@@ -212,14 +212,14 @@ export const optionImages = {
   },
   shoes: {
     "shoes-1": ["default"],
-    "shoes-2": ["red", "gray", "black", "brown", "white"],
-    "shoes-3": ["red", "gray", "black", "brown", "white"],
-    "shoes-4": ["red", "gray", "black", "brown", "white"],
-    "shoes-5": ["red", "gray", "black", "brown", "white"],
+    "shoes-2": ["black", "gray", "red", "brown", "white"],
+    "shoes-3": ["brown", "gray", "black", "red", "white"],
+    "shoes-4": ["black", "gray", "red", "brown", "white"],
+    "shoes-5": ["gray", "red", "black", "brown", "white"],
     "shoes-6": ["black", "brown", "white"],
     "shoes-7": ["brown", "white", "black"],
-    "shoes-8": ["red", "gray", "black", "brown", "white"],
-    "shoes-9": ["red", "gray", "black", "brown", "white"],
+    "shoes-8": ["black", "gray", "red", "brown", "white"],
+    "shoes-9": ["gray", "red", "black", "brown", "white"],
   },
 };
 
