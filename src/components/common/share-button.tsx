@@ -14,10 +14,14 @@ export default function ShareButton({
   department: (typeof Departments)[number];
 }) {
   const [name, setName] = useState("");
+  const [randomQuoteNumber, setRandomQuoteNumber] = useState<1 | 2 | null>(
+    null,
+  );
 
   useEffect(() => {
-    return setName(localStorage.getItem("name") || "");
-  }, [name]);
+    setName(localStorage.getItem("name") || "");
+    setRandomQuoteNumber((Math.floor(Math.random() * 2) + 1) as 1 | 2);
+  }, []);
 
   const shareRef = useRef<HTMLDivElement>(null);
 
@@ -67,7 +71,11 @@ export default function ShareButton({
                 <p className="text-3xl font-bold">
                   {name} 0.5 {department.name.short}
                 </p>
-                <p className="text-xl font-bold">{department.quote}</p>
+                {randomQuoteNumber && (
+                  <p className="text-xl font-bold">
+                    {department[`quote_${randomQuoteNumber}`]}
+                  </p>
+                )}
               </div>
               <div className="flex scale-110 flex-col items-center space-y-2">
                 <p className="text-xl font-bold opacity-80">
