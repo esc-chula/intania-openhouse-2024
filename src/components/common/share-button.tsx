@@ -44,8 +44,12 @@ export default function ShareButton({
             <Header />
             <div className="flex w-full flex-col items-center space-y-[48px] pt-6">
               <div className="relative flex h-[540px] w-full items-center justify-center">
-                <div className="absolute bottom-1 left-14 right-14 top-1 z-10 flex items-end justify-center rounded-[18px] bg-gray-300">
-                  <LocalAvatar className="scale-90" useLocalImage />
+                <div className="absolute bottom-1 left-14 right-14 top-1 z-10 flex items-end justify-center rounded-[18px] bg-[url('/assets/avatar/background.webp')] bg-cover bg-bottom">
+                  <LocalAvatar
+                    className="-mb-6 scale-90"
+                    useLocalImage
+                    hideShadow
+                  />
                 </div>
                 <div className="absolute scale-[1.15]">
                   <picture>

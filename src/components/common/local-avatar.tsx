@@ -7,9 +7,11 @@ import Avatar from "./avatar";
 export default function LocalAvatar({
   className,
   useLocalImage,
+  hideShadow,
 }: {
   className?: string;
   useLocalImage?: boolean;
+  hideShadow?: boolean;
 }) {
   const [option, setOption] = useState(initialOption);
 
@@ -22,6 +24,7 @@ export default function LocalAvatar({
       option={option}
       className={className}
       useLocalImage={useLocalImage}
+      hideShadow={hideShadow}
     />
   );
 }
