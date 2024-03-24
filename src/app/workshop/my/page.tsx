@@ -123,23 +123,20 @@ export default function MyWorkshop() {
       </div>
 
       <div className="flex w-full flex-col items-center space-y-6 pt-4">
-        {tours.map((workshop) => (
+        {tours.map((tour) => (
           <div
-            key={workshop.id}
+            key={tour.id}
             className="flex w-full items-center justify-between rounded-3xl bg-white bg-button-solid p-4 shadow-button-solid"
           >
             <div>
-              <h2 className="text-xl font-bold text-primary">
-                {workshop.date}
-              </h2>
+              <h2 className="text-xl font-bold text-primary">Intania Tour</h2>
               <p className="font-bold text-gray-500">
-                {workshop.date} {workshop.time}
+                {tour.date} {tour.time}
               </p>
-              <p className="mt-2 text-xs text-gray-400">{workshop.time}</p>
             </div>
             <div>
               <button
-                onClick={() => setQr(workshop.id)}
+                onClick={() => setQr(tour.id)}
                 className="rounded-full bg-primary px-3 py-1 text-[10px] text-white shadow-button-solid"
               >
                 QR Code
