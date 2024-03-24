@@ -6,7 +6,7 @@ import Button from "@/components/ui/button";
 import {
   canBeEmpty,
   initialOption,
-  optionImages,
+  optionImages as initialOptionImages,
   optionName,
   zoomedOptions,
 } from "@/constants/avatar";
@@ -17,7 +17,9 @@ import { AiOutlineStop } from "react-icons/ai";
 
 export default function AvatarCustomize() {
   const [option, setOption] = useState(initialOption);
-  const [tab, setTab] = useState<keyof typeof optionImages>("base");
+  const [tab, setTab] = useState<keyof typeof initialOptionImages>("base");
+  const [optionImages, setOptionImages] = useState(initialOptionImages);
+  const [colorOptions, setColorOptions] = useState<string[]>([]);
 
   useEffect(() => {
     localStorage.setItem("option", JSON.stringify(option));
@@ -56,28 +58,124 @@ export default function AvatarCustomize() {
               <AiOutlineStop className="text-3xl text-black/10" />
             </button>
           )}
-          {optionImages[tab as keyof typeof optionImages].map(
-            (optionImage: string) => (
-              <button
-                key={tab + optionImage}
-                onClick={() => handleOptionChange(tab, optionImage)}
-                className={`-mb-1 aspect-[10/13] w-1/3 ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
-              >
-                <div className="relative h-full">
-                  <Image
-                    src={`/assets/avatar/${tab}/${tab}-${optionImage}.PNG`}
+          {Array.isArray(optionImages[tab as keyof typeof optionImages])
+            ? (optionImages[tab as keyof typeof optionImages] as string[]).map(
+                (optionImage) => (
+                  <button
                     key={tab + optionImage}
-                    alt=""
-                    fill
-                    priority
-                    loading="eager"
-                    className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
-                    quality={10}
-                  />
-                </div>
-              </button>
-            ),
-          )}
+                    onClick={() => handleOptionChange(tab, optionImage)}
+                    className={`-mb-1 aspect-[10/13] w-1/3 ${option[tab as keyof typeof option] === optionImage ? "bg-black/5" : ""}`}
+                  >
+                    <div className="relative h-full">
+                      <Image
+                        src={`/assets/avatar/${tab}/${optionImage}.png`}
+                        key={tab + optionImage}
+                        alt=""
+                        fill
+                        priority
+                        loading="eager"
+                        className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
+                        quality={10}
+                      />
+                    </div>
+                  </button>
+                ),
+              )
+            : Object.keys(optionImages[tab as keyof typeof optionImages]).map(
+                (key) => {
+                  const subOptions = optionImages[
+                    tab as keyof typeof optionImages
+                  ][key as keyof (typeof optionImages)[typeof tab]] as string[];
+
+                  const hasColorOptions = subOptions.length > 1;
+
+                  return (
+                    <div
+                      key={tab + key}
+                      className="relative aspect-[10/13] w-1/3"
+                    >
+                      <button
+                        onClick={() => {
+                          if (hasColorOptions) {
+                            setColorOptions(subOptions);
+                            handleOptionChange(tab, `${key}-${subOptions[0]}`);
+                            return;
+                          }
+
+                          setColorOptions([]);
+                          handleOptionChange(tab, `${key}-${subOptions[0]}`);
+                        }}
+                        className={`relative -mb-1 h-full w-full ${option[tab as keyof typeof option] === `${key}-${subOptions[0]}` ? "bg-black/5" : ""}`}
+                      >
+                        <div className="relative h-full">
+                          <Image
+                            src={`/assets/avatar/${tab}/${key}/${subOptions[0]}.png`}
+                            key={tab + key}
+                            alt=""
+                            fill
+                            priority
+                            loading="eager"
+                            className={`object-cover ${zoomedOptions.includes(tab) ? "absolute scale-150" : ""}`}
+                            quality={10}
+                          />
+                        </div>
+                      </button>
+                      {colorOptions.length > 0 &&
+                      option[tab as keyof typeof option] ===
+                        `${key}-${subOptions[0]}` ? (
+                        <>
+                          <div className="fixed bottom-4 left-2 right-2 z-50 rounded-2xl bg-button-solid px-4 shadow-xl">
+                            {colorOptions.map((colorOption) => (
+                              <button
+                                key={colorOption}
+                                onClick={() => {
+                                  handleOptionChange(
+                                    tab,
+                                    `${key}-${colorOption}`,
+                                  );
+                                  setColorOptions([]);
+                                  setOptionImages({
+                                    ...optionImages,
+                                    [tab]: {
+                                      ...optionImages[
+                                        tab as keyof typeof optionImages
+                                      ],
+                                      [key]: [
+                                        colorOption,
+                                        ...subOptions.filter(
+                                          (subOption) =>
+                                            subOption !== colorOption,
+                                        ),
+                                      ],
+                                    },
+                                  });
+                                }}
+                                className={`aspect-square h-[12vh]`}
+                              >
+                                <div className="relative h-full">
+                                  <picture>
+                                    <img
+                                      src={`/assets/avatar/${tab}/${key}/${colorOption}.png`}
+                                      key={tab + key}
+                                      alt=""
+                                      loading="eager"
+                                      className="object-cover"
+                                    />
+                                  </picture>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                          <div
+                            onClick={() => setColorOptions([])}
+                            className="fixed bottom-0 left-0 right-0 top-0 z-40"
+                          ></div>
+                        </>
+                      ) : null}
+                    </div>
+                  );
+                },
+              )}
         </div>
       </div>
 

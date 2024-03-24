@@ -29,6 +29,7 @@ export default function CustomBackground() {
       className="select-none object-cover"
       priority
       loading="eager"
+      sizes="100vw"
     />
   );
 }

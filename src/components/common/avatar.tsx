@@ -1,18 +1,17 @@
 "use client";
 
-import { optionImages } from "@/constants/avatar";
 import { cn } from "@/utils/cn";
 
 interface AvatarProps {
   option: {
-    base: (typeof optionImages.base)[number];
-    eyes: (typeof optionImages.eyes)[number];
-    eyebrows: (typeof optionImages.eyebrows)[number];
-    hair: (typeof optionImages.hair)[number];
-    shirt: (typeof optionImages.shirt)[number];
-    shoes: (typeof optionImages.shoes)[number];
-    pants: (typeof optionImages.pants)[number];
-    outer: (typeof optionImages.outer)[number];
+    base: string;
+    eyes: string;
+    eyebrows: string;
+    hair: string;
+    shirt: string;
+    shoes: string;
+    pants: string;
+    outer: string;
   };
   className?: string;
 }
@@ -23,7 +22,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.base && (
         <picture>
           <img
-            src={`/assets/avatar/base/base-${option.base}.PNG`}
+            src={`/assets/avatar/base/${option.base}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[1]`}
             loading="eager"
@@ -33,7 +32,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.eyes && (
         <picture>
           <img
-            src={`/assets/avatar/eyes/eyes-${option.eyes}.PNG`}
+            src={`/assets/avatar/eyes/${`${option.eyes.split("-")[0]}-${option.eyes.split("-")[1]}`}/${option.eyes.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[2]`}
             loading="eager"
@@ -43,7 +42,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.eyebrows && (
         <picture>
           <img
-            src={`/assets/avatar/eyebrows/eyebrows-${option.eyebrows}.PNG`}
+            src={`/assets/avatar/eyebrows/${option.eyebrows}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[3]`}
             loading="eager"
@@ -53,7 +52,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.hair && (
         <picture>
           <img
-            src={`/assets/avatar/hair/hair-${option.hair}.PNG`}
+            src={`/assets/avatar/hair/${`${option.hair.split("-")[0]}-${option.hair.split("-")[1]}`}/${option.hair.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[4]`}
             loading="eager"
@@ -63,7 +62,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.shirt && (
         <picture>
           <img
-            src={`/assets/avatar/shirt/shirt-${option.shirt}.PNG`}
+            src={`/assets/avatar/shirt/${`${option.shirt.split("-")[0]}-${option.shirt.split("-")[1]}`}/${option.shirt.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[5]`}
             loading="eager"
@@ -73,7 +72,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.shoes && (
         <picture>
           <img
-            src={`/assets/avatar/shoes/shoes-${option.shoes}.PNG`}
+            src={`/assets/avatar/shoes/${`${option.shoes.split("-")[0]}-${option.shoes.split("-")[1]}`}/${option.shoes.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[6]`}
             loading="eager"
@@ -83,7 +82,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.pants && (
         <picture>
           <img
-            src={`/assets/avatar/pants/pants-${option.pants}.PNG`}
+            src={`/assets/avatar/pants/${`${option.pants.split("-")[0]}-${option.pants.split("-")[1]}`}/${option.pants.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[7]`}
           />
@@ -92,7 +91,7 @@ export default function Avatar({ option, className }: AvatarProps) {
       {option.outer && (
         <picture>
           <img
-            src={`/assets/avatar/outer/outer-${option.outer}.PNG`}
+            src={`/assets/avatar/outer/${`${option.outer.split("-")[0]}-${option.outer.split("-")[1]}`}/${option.outer.split("-")[2]}.png`}
             alt="Avatar"
             className={`absolute bottom-0 left-0 right-0 z-[8]`}
             loading="eager"
