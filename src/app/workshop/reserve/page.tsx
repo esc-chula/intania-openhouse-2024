@@ -210,7 +210,7 @@ export default function ReserveWorkshop() {
           <option value="" disabled hidden>
             เวลา
           </option>
-          {workshopTimes.map((time) => (
+          {tourTimes.map((time) => (
             <option key={time} value={time} className="text-black">
               {time}
             </option>
