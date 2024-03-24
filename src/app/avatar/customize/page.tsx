@@ -3,10 +3,17 @@
 import Avatar from "@/components/common/avatar";
 import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
-import { initialOption, optionImages, optionName } from "@/constants/avatar";
+import {
+  canBeEmpty,
+  initialOption,
+  optionImages,
+  optionName,
+  zoomedOptions,
+} from "@/constants/avatar";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AiOutlineStop } from "react-icons/ai";
 
 export default function AvatarCustomize() {
   const [option, setOption] = useState(initialOption);
@@ -19,8 +26,6 @@ export default function AvatarCustomize() {
   const handleOptionChange = (tab: string, image: string) => {
     setOption({ ...option, [tab]: image });
   };
-
-  const zoomedOptions = ["eyes", "eyebrows", "outer", "shirt"];
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-between">
@@ -43,6 +48,14 @@ export default function AvatarCustomize() {
           ))}
         </div>
         <div className="flex h-full w-full flex-wrap items-start overflow-hidden rounded-b-[30px]">
+          {canBeEmpty.includes(tab) && (
+            <button
+              onClick={() => handleOptionChange(tab, "")}
+              className={`-mb-1 grid h-40 w-1/3 place-content-center ${option[tab as keyof typeof option] === "" ? "bg-black/5" : ""}`}
+            >
+              <AiOutlineStop className="text-3xl text-black/10" />
+            </button>
+          )}
           {optionImages[tab as keyof typeof optionImages].map(
             (optionImage: string) => (
               <button

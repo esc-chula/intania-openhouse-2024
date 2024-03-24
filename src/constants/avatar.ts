@@ -40,3 +40,14 @@ export const initialOption = {
   outer: optionImages.outer[0],
   shoes: optionImages.shoes[0],
 };
+
+export const zoomedOptions = ["eyes", "eyebrows", "outer", "shirt"];
+
+export const canBeEmpty = [
+  "outer",
+  "shirt",
+  "pants",
+  "shoes",
+  "hair",
+  "eyebrows",
+];
