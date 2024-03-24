@@ -58,7 +58,7 @@ export default function ShareImage({
         </div>
       </div>
       <Image
-        src={`/assets/background/background-${newBackgroundNumber}.webp`}
+        src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/background%2Fbackground-${newBackgroundNumber}.webp?alt=media`}
         alt="Background"
         fill
         className="select-none object-cover"

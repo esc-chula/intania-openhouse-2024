@@ -23,7 +23,7 @@ export default function CustomBackground() {
 
   return (
     <Image
-      src={`/assets/background/background-${backgroundNumber}.webp`}
+      src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/background%2Fbackground-${backgroundNumber}.webp?alt=media`}
       alt="Background"
       fill
       className="select-none object-cover"

@@ -78,7 +78,7 @@ export default function ShareButton({
           <div className="absolute h-full w-full">
             <picture className="">
               <img
-                src={`/assets/background/background-${department.background}.webp`}
+                src={`https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/background%2Fbackground-${department.background}.webp?alt=media`}
                 alt="background"
                 height={1920}
                 width={1080}
