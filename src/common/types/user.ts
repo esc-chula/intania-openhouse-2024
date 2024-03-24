@@ -12,4 +12,5 @@ export type User = {
   school?: string;
   howFound?: string;
   workshops: string[];
+  tours: string[];
 };
