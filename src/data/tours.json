@@ -1,0 +1,9 @@
+[
+  {
+    "id": "random-id",
+    "date": "test Date",
+    "time": "evening",
+    "maxUser": 10,
+    "users": []
+  }
+]

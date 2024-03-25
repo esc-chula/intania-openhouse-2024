@@ -3,6 +3,8 @@
 import { Tour } from "@/common/types/tour";
 import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
+import rawToursData from "@/data/tours.json";
+import rawWorkshopsData from "@/data/workshops.json";
 import { fetcher } from "@/utils/axios";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -44,51 +46,24 @@ export default function MyWorkshop() {
     if (!userData) {
       return;
     }
+    // TODO: Investigate switch from reserve to my page
+    // UserData contains the lists of all users during the switch
+    // But after refresh, userData returns to normal
 
-    const fetchWorkshops = async () => {
-      try {
-        const workshopsData = await Promise.all(
-          (userData as User).workshops.map(async (workshopId) => {
-            try {
-              const response = await axios.get(`/api/workshop/${workshopId}`);
-              return response.data;
-            } catch (error) {
-              console.error("Error fetching workshop:", error);
-              return null;
-            }
-          }),
-        );
+    // console.log(userData);
 
-        setWorkshops(workshopsData as Workshop[]);
-      } catch (error) {
-        console.error("Error fetching workshops:", error);
-      }
-    };
+    const workshopsData = (userData as User).workshops.map((workshopId) => {
+      return rawWorkshopsData.find(
+        (workshop) => workshop.id === workshopId,
+      ) as Workshop;
+    });
+    setWorkshops(workshopsData);
 
-    const fetchTours = async () => {
-      try {
-        const toursData = await Promise.all(
-          (userData as User).tours.map(async (tourId) => {
-            try {
-              const response = await axios.get(`/api/tour/${tourId}`);
-              return response.data;
-            } catch (error) {
-              console.error("Error fetching tour:", error);
-              return null;
-            }
-          }),
-        );
-
-        setTours(toursData as Tour[]);
-      } catch (error) {
-        console.error("Error fetching tours:", error);
-      }
-    };
-
-    fetchWorkshops();
-    fetchTours();
+    const toursData = (userData as User).tours.map((tourId) => {
+      return rawToursData.find((tour) => tour.id === tourId) as Tour;
+    });
+    setTours(toursData);
   }, [userData]);
-
   const [qr, setQr] = useState<string>("");
 
   return (

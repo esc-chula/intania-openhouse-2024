@@ -100,8 +100,8 @@ export default function ReserveWorkshop() {
     setLoading(true);
 
     try {
-      await Promise.all([
-        fetch("/api/workshop/reserve", {
+      if (selectedWorkshopId !== "") {
+        await fetch("/api/workshop/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -110,8 +110,11 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             workshopId: selectedWorkshopId,
           }),
-        }),
-        fetch("/api/tour/reserve", {
+        });
+      }
+
+      if (selectedTourId !== "") {
+        await fetch("/api/tour/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -120,8 +123,8 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             tourId: selectedTourId,
           }),
-        }),
-      ]);
+        });
+      }
 
       router.push("/workshop/my");
     } catch (error) {
@@ -150,7 +153,6 @@ export default function ReserveWorkshop() {
     )
     .map((workshop) => workshop.time);
 
-  console.log(tours);
   const filteredTours = tours.filter(
     (tour) => tour.users.length < tour.maxUser,
   );
