@@ -131,15 +131,18 @@ export default function ReserveWorkshop() {
     setLoading(false);
   };
 
+  const filteredWorkshops = workshops.filter(
+    (workshop) => workshop.users.length < workshop.maxUser,
+  );
   const workshopDepartments = Array.from(
-    new Set(workshops.map((workshop) => workshop.department)),
+    new Set(filteredWorkshops.map((workshop) => workshop.department)),
   );
 
-  const workshopDates = workshops
+  const workshopDates = filteredWorkshops
     .filter((workshop) => workshop.department === selectedWorkshopDepartment)
     .map((workshop) => workshop.date);
 
-  const workshopTimes = workshops
+  const workshopTimes = filteredWorkshops
     .filter(
       (workshop) =>
         workshop.department === selectedWorkshopDepartment &&
@@ -147,9 +150,13 @@ export default function ReserveWorkshop() {
     )
     .map((workshop) => workshop.time);
 
-  const tourDates = Array.from(new Set(tours.map((tour) => tour.date)));
+  console.log(tours);
+  const filteredTours = tours.filter(
+    (tour) => tour.users.length < tour.maxUser,
+  );
+  const tourDates = Array.from(new Set(filteredTours.map((tour) => tour.date)));
 
-  const tourTimes = tours
+  const tourTimes = filteredTours
     .filter((tour) => tour.date === selectedTourDate)
     .map((tour) => tour.time);
 
@@ -164,7 +171,12 @@ export default function ReserveWorkshop() {
         <Select
           name="department"
           value={selectedWorkshopDepartment}
-          onChange={(e) => setSelectedWorkshopDepartment(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopDepartment(e.target.value);
+            setSelectedWorkshopDate("");
+            setSelectedWorkshopTime("");
+            setSelectedWorkshopId("");
+          }}
         >
           <option value="" disabled hidden>
             ภาควิชา
@@ -178,7 +190,11 @@ export default function ReserveWorkshop() {
         <Select
           name="date"
           value={selectedWorkshopDate}
-          onChange={(e) => setSelectedWorkshopDate(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopDate(e.target.value);
+            setSelectedWorkshopTime("");
+            setSelectedWorkshopId("");
+          }}
         >
           <option value="" disabled hidden>
             วันที่
@@ -195,7 +211,9 @@ export default function ReserveWorkshop() {
         <Select
           name="time"
           value={selectedWorkshopTime}
-          onChange={(e) => setSelectedWorkshopTime(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopTime(e.target.value);
+          }}
         >
           <option value="" disabled hidden>
             เวลา
@@ -213,7 +231,11 @@ export default function ReserveWorkshop() {
         <Select
           name="date"
           value={selectedTourDate}
-          onChange={(e) => setSelectedTourDate(e.target.value)}
+          onChange={(e) => {
+            setSelectedTourDate(e.target.value);
+            setSelectedTourTime("");
+            setSelectedTourId("");
+          }}
         >
           <option value="" disabled hidden>
             วันที่

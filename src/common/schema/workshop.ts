@@ -8,3 +8,8 @@ export const WorkshopSchema = z.object({
   users: z.optional(z.array(z.string())),
   maxUser: z.number(),
 });
+
+export const CancelWorksopSchema = z.object({
+  workshopId: z.string(),
+  userId: z.string(),
+});

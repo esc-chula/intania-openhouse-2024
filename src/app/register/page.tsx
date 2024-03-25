@@ -106,10 +106,10 @@ export default function Register() {
             เลือกคำนำหน้า
           </option>
           <option value="male" className="text-black">
-            ชาย
+            นาย
           </option>
           <option value="female" className="text-black">
-            หญิง
+            นางสาว
           </option>
         </Select>
         <Input
