@@ -49,15 +49,16 @@ export const GET = async (
 
   const userData = user.result.data() as User;
 
-  const reservedWorkshops = userData.workshops.map((workshopId) =>
-    workshopsData.find((workshop) => workshop.id === workshopId),
+  const reservedWorkshops = userData.workshops.map(
+    (workshopId) =>
+      workshopsData.find((workshop) => workshop.id === workshopId) as Workshop,
   );
   const reservedDepartments = Array.from(
-    new Set(...reservedWorkshops.map((workshop) => workshop?.department)),
+    new Set(reservedWorkshops.map((workshop) => workshop.department)),
   );
-  const filteredWorkshop = workshopsData.filter(
+  const filteredWorkshops = workshopsData.filter(
     (workshop) => !reservedDepartments.includes(workshop.department),
   );
 
-  return NextResponse.json(filteredWorkshop);
+  return NextResponse.json(filteredWorkshops);
 };
