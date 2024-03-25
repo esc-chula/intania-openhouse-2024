@@ -226,41 +226,43 @@ export default function ReserveWorkshop() {
         </Select>
       </div>
 
-      <div className="flex w-full flex-col items-center space-y-6">
-        <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
-        <Select
-          name="date"
-          value={selectedTourDate}
-          onChange={(e) => {
-            setSelectedTourDate(e.target.value);
-            setSelectedTourTime("");
-            setSelectedTourId("");
-          }}
-        >
-          <option value="" disabled hidden>
-            วันที่
-          </option>
-          {tourDates.map((date) => (
-            <option key={date} value={date} className="text-black">
-              {date}
+      {tours.length > 0 && (
+        <div className="flex w-full flex-col items-center space-y-6">
+          <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
+          <Select
+            name="date"
+            value={selectedTourDate}
+            onChange={(e) => {
+              setSelectedTourDate(e.target.value);
+              setSelectedTourTime("");
+              setSelectedTourId("");
+            }}
+          >
+            <option value="" disabled hidden>
+              วันที่
             </option>
-          ))}
-        </Select>
-        <Select
-          name="time"
-          value={selectedTourTime}
-          onChange={(e) => setSelectedTourTime(e.target.value)}
-        >
-          <option value="" disabled hidden>
-            เวลา
-          </option>
-          {tourTimes.map((time) => (
-            <option key={time} value={time} className="text-black">
-              {time}
+            {tourDates.map((date) => (
+              <option key={date} value={date} className="text-black">
+                {date}
+              </option>
+            ))}
+          </Select>
+          <Select
+            name="time"
+            value={selectedTourTime}
+            onChange={(e) => setSelectedTourTime(e.target.value)}
+          >
+            <option value="" disabled hidden>
+              เวลา
             </option>
-          ))}
-        </Select>
-      </div>
+            {tourTimes.map((time) => (
+              <option key={time} value={time} className="text-black">
+                {time}
+              </option>
+            ))}
+          </Select>
+        </div>
+      )}
 
       <div className="flex flex-col items-center space-y-4 pb-6">
         <p className="text-center text-xs">
