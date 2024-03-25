@@ -161,7 +161,7 @@ export default function Avatar({
                 : `https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2Fshoes%2F${`${option.shoes.split("-")[0]}-${option.shoes.split("-")[1]}`}%2F${option.shoes.split("-")[2]}.png?alt=media`
             }
             alt="Avatar"
-            className={`absolute bottom-0 left-0 right-0 z-[7]`}
+            className={`absolute bottom-0 left-0 right-0 z-[4]`}
             loading="eager"
           />
         </picture>
