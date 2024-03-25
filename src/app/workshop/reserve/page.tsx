@@ -37,7 +37,9 @@ export default function ReserveWorkshop() {
 
     const fetchWorkshops = async () => {
       try {
-        const response = await fetch("/api/workshop");
+        const response = await fetch(
+          "/api/workshop/user/" + formData.mobileNumber,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch workshops");
         }
@@ -50,7 +52,7 @@ export default function ReserveWorkshop() {
 
     const fetchTours = async () => {
       try {
-        const response = await fetch("/api/tour");
+        const response = await fetch("/api/tour/user/" + formData.mobileNumber);
         if (!response.ok) {
           throw new Error("Failed to fetch tours");
         }
@@ -63,7 +65,7 @@ export default function ReserveWorkshop() {
 
     fetchWorkshops();
     fetchTours();
-  }, [router]);
+  }, [router, mobileNumber]);
 
   useEffect(() => {
     const selectedWorkshop = workshops.find(
@@ -100,8 +102,8 @@ export default function ReserveWorkshop() {
     setLoading(true);
 
     try {
-      await Promise.all([
-        fetch("/api/workshop/reserve", {
+      if (selectedWorkshopId !== "") {
+        await fetch("/api/workshop/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -110,8 +112,11 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             workshopId: selectedWorkshopId,
           }),
-        }),
-        fetch("/api/tour/reserve", {
+        });
+      }
+
+      if (selectedTourId !== "") {
+        await fetch("/api/tour/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -120,8 +125,8 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             tourId: selectedTourId,
           }),
-        }),
-      ]);
+        });
+      }
 
       router.push("/workshop/my");
     } catch (error) {
@@ -131,18 +136,15 @@ export default function ReserveWorkshop() {
     setLoading(false);
   };
 
-  const filteredWorkshops = workshops.filter(
-    (workshop) => workshop.users.length < workshop.maxUser,
-  );
   const workshopDepartments = Array.from(
-    new Set(filteredWorkshops.map((workshop) => workshop.department)),
+    new Set(workshops.map((workshop) => workshop.department)),
   );
 
-  const workshopDates = filteredWorkshops
+  const workshopDates = workshops
     .filter((workshop) => workshop.department === selectedWorkshopDepartment)
     .map((workshop) => workshop.date);
 
-  const workshopTimes = filteredWorkshops
+  const workshopTimes = workshops
     .filter(
       (workshop) =>
         workshop.department === selectedWorkshopDepartment &&
@@ -150,13 +152,9 @@ export default function ReserveWorkshop() {
     )
     .map((workshop) => workshop.time);
 
-  console.log(tours);
-  const filteredTours = tours.filter(
-    (tour) => tour.users.length < tour.maxUser,
-  );
-  const tourDates = Array.from(new Set(filteredTours.map((tour) => tour.date)));
+  const tourDates = Array.from(new Set(tours.map((tour) => tour.date)));
 
-  const tourTimes = filteredTours
+  const tourTimes = tours
     .filter((tour) => tour.date === selectedTourDate)
     .map((tour) => tour.time);
 
