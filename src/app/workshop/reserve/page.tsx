@@ -13,6 +13,7 @@ export default function ReserveWorkshop() {
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [selectedWorkshopDepartment, setSelectedWorkshopDepartment] =
     useState("");
@@ -96,6 +97,8 @@ export default function ReserveWorkshop() {
   }, [selectedTourTime, selectedTourDate, tours]);
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     try {
       await Promise.all([
         fetch("/api/workshop/reserve", {
@@ -119,9 +122,13 @@ export default function ReserveWorkshop() {
           }),
         }),
       ]);
+
+      router.push("/workshop/my");
     } catch (error) {
       console.error("Error reserving:", error);
     }
+
+    setLoading(false);
   };
 
   const workshopDepartments = Array.from(
@@ -241,7 +248,12 @@ export default function ReserveWorkshop() {
           <br />
           จะไม่แสดงให้สามารถเลือกได้
         </p>
-        <Button size="default" className="w-36" onClick={handleSubmit}>
+        <Button
+          size="default"
+          className="w-36"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
           จอง
         </Button>
       </div>
