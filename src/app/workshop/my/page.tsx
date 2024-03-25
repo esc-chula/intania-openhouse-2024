@@ -1,10 +1,6 @@
 "use client";
 
-import { Tour } from "@/common/types/tour";
-import { User } from "@/common/types/user";
-import { Workshop } from "@/common/types/workshop";
-import rawToursData from "@/data/tours.json";
-import rawWorkshopsData from "@/data/workshops.json";
+import { User, UserReservation } from "@/common/types/user";
 import { fetcher } from "@/utils/axios";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -15,20 +11,25 @@ import useSWR from "swr";
 export default function MyWorkshop() {
   const router = useRouter();
 
-  const [workshops, setWorkshops] = useState<Workshop[]>([]);
-  const [tours, setTours] = useState<Tour[]>([]);
   const [userPhoneNumber, setUserPhoneNumber] = useState<string>("");
 
   const {
-    data: userData,
-    isLoading: isUserDataLoading,
-    error: userDataError,
-    mutate: mutateUserData,
-  } = useSWR(`/api/user/${userPhoneNumber}`, fetcher, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    revalidateOnMount: true,
-  });
+    data: userReservation,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR<UserReservation>(
+    `/api/user/${userPhoneNumber}/reservation`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateOnMount: true,
+    },
+  );
+
+  const workshops = userReservation?.workshops;
+  const tours = userReservation?.tours;
 
   useEffect(() => {
     const formData = JSON.parse(
@@ -43,28 +44,11 @@ export default function MyWorkshop() {
   }, [router]);
 
   useEffect(() => {
-    if (!userData) {
-      return;
+    if (userPhoneNumber) {
+      mutate();
     }
-    // TODO: Investigate this please T_T
-    // Try switching from reserve to my page
-    // UserData contains the lists of all users during the switch
-    // But after refresh, userData returns to normal
+  }, [mutate, userPhoneNumber]);
 
-    // console.log(userData);
-
-    const workshopsData = (userData as User).workshops.map((workshopId) => {
-      return rawWorkshopsData.find(
-        (workshop) => workshop.id === workshopId,
-      ) as Workshop;
-    });
-    setWorkshops(workshopsData);
-
-    const toursData = (userData as User).tours.map((tourId) => {
-      return rawToursData.find((tour) => tour.id === tourId) as Tour;
-    });
-    setTours(toursData);
-  }, [userData]);
   const [qr, setQr] = useState<string>("");
 
   return (
@@ -81,8 +65,8 @@ export default function MyWorkshop() {
           </div>
         </div>
       )}
-      <div className="flex w-full flex-col items-center space-y-6 pt-4">
-        {workshops.map((workshop) => (
+      <div className="flex w-full flex-col items-center space-y-6 py-4">
+        {workshops?.map((workshop) => (
           <div
             key={workshop.id}
             className="flex w-full items-center justify-between rounded-3xl bg-white bg-button-solid p-4 shadow-button-solid"
@@ -118,7 +102,7 @@ export default function MyWorkshop() {
                       workshopId: workshop.id,
                       userId: userPhoneNumber,
                     })
-                    .then(() => mutateUserData())
+                    .then(() => mutate())
                     .catch((error) => {
                       console.error("Error cancelling workshop:", error);
                     });
@@ -132,8 +116,8 @@ export default function MyWorkshop() {
         ))}
       </div>
 
-      <div className="flex w-full flex-col items-center space-y-6 pt-4">
-        {tours.map((tour) => (
+      <div className="flex w-full flex-col items-center space-y-6 py-4">
+        {tours?.map((tour) => (
           <div
             key={tour.id}
             className="flex w-full items-center justify-between rounded-3xl bg-white bg-button-solid p-4 shadow-button-solid"
@@ -166,7 +150,7 @@ export default function MyWorkshop() {
                       tourId: tour.id,
                       userId: userPhoneNumber,
                     })
-                    .then(() => mutateUserData())
+                    .then(() => mutate())
                     .catch((error) => {
                       console.error("Error cancelling tour:", error);
                     });
@@ -180,7 +164,7 @@ export default function MyWorkshop() {
         ))}
       </div>
 
-      {workshops.length === 0 && tours.length === 0 && (
+      {workshops?.length === 0 && tours?.length === 0 && (
         <div className="flex w-full items-center justify-center">
           <p className="text-center text-xl font-bold text-white/60">
             ยังไม่มีข้อมูลการลงทะเบียน
