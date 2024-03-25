@@ -38,6 +38,9 @@ export default function DepartmentPage({
               </div>
             </div>
           </div>
+          <div className="flex flex-col items-center gap-5">
+            <ShareButton department={department} />
+          </div>
           <div className="flex w-full flex-col gap-1.5">
             <h1 className="text-4xl font-bold">
               {department.name.th.length > 20
@@ -60,14 +63,6 @@ export default function DepartmentPage({
               }}
             ></p>
           </div>
-        </div>
-        <div className="flex flex-col items-center gap-5">
-          {/* <Link href="/register">
-            <Button variant="default" className="w-48">
-              จอง Workshop
-            </Button>
-          </Link> */}
-          <ShareButton department={department} />
         </div>
       </div>
     </>
