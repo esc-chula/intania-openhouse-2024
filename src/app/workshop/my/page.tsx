@@ -3,51 +3,53 @@
 import { Tour } from "@/common/types/tour";
 import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
+import { fetcher } from "@/utils/axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 export default function MyWorkshop() {
   const router = useRouter();
 
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
+  const [userPhoneNumber] = useState<string>(
+    (JSON.parse(localStorage.getItem("formData") ?? "{}") as User).mobileNumber,
+  );
+
+  const {
+    data: userData,
+    isLoading: isUserDataLoading,
+    error: userDataError,
+    mutate: mutateUserData,
+  } = useSWR(`/api/user/${userPhoneNumber}`, fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    revalidateOnMount: true,
+  });
 
   useEffect(() => {
-    const userFormData = JSON.parse(localStorage.getItem("formData") ?? "{}");
-
-    if (!Object.keys(userFormData).length) {
-      router.push("/register");
+    if (!userData) {
       return;
     }
 
-    const userPhoneNumber = (userFormData as User).mobileNumber;
-
     const fetchWorkshops = async () => {
       try {
-        const userResponse = await fetch("/api/user/" + userPhoneNumber, {
-          method: "GET",
-        });
-        if (!userResponse) {
-          throw new Error("Cannot fetch user or User does not exist");
-        }
-
-        const userData = (await userResponse.json()) as User;
-        const workshopsData = (await Promise.all(
-          userData.workshops.map(async (workshopId) => {
-            const response = await fetch("/api/workshop/" + workshopId, {
-              method: "GET",
-            });
-            if (!response) {
-              throw new Error(
-                "Cannot fetch workshop or Workshop does not exist",
-              );
+        const workshopsData = await Promise.all(
+          (userData as User).workshops.map(async (workshopId) => {
+            try {
+              const response = await axios.get(`/api/workshop/${workshopId}`);
+              return response.data;
+            } catch (error) {
+              console.error("Error fetching workshop:", error);
+              return null;
             }
-            return response.json();
           }),
-        )) as Workshop[];
+        );
 
-        setWorkshops(workshopsData);
+        setWorkshops(workshopsData as Workshop[]);
       } catch (error) {
         console.error("Error fetching workshops:", error);
       }
@@ -55,35 +57,27 @@ export default function MyWorkshop() {
 
     const fetchTours = async () => {
       try {
-        const userResponse = await fetch("/api/user/" + userPhoneNumber, {
-          method: "GET",
-        });
-        if (!userResponse) {
-          throw new Error("Cannot fetch user or User does not exist");
-        }
-
-        const userData = (await userResponse.json()) as User;
-        const toursData = (await Promise.all(
-          userData.tours.map(async (tourId) => {
-            const response = await fetch("/api/tour/" + tourId, {
-              method: "GET",
-            });
-            if (!response) {
-              throw new Error("Cannot fetch tour or Tour does not exist");
+        const toursData = await Promise.all(
+          (userData as User).tours.map(async (tourId) => {
+            try {
+              const response = await axios.get(`/api/tour/${tourId}`);
+              return response.data;
+            } catch (error) {
+              console.error("Error fetching tour:", error);
+              return null;
             }
-            return response.json();
           }),
-        )) as Workshop[];
+        );
 
-        setTours(toursData);
+        setTours(toursData as Tour[]);
       } catch (error) {
-        console.error("Error fetching workshops:", error);
+        console.error("Error fetching tours:", error);
       }
     };
 
     fetchWorkshops();
     fetchTours();
-  }, [router]);
+  }, [userData]);
 
   const [qr, setQr] = useState<string>("");
 
@@ -116,12 +110,36 @@ export default function MyWorkshop() {
               </p>
               <p className="mt-2 text-xs text-gray-400">{workshop.location}</p>
             </div>
-            <div>
+            <div className="flex flex-col items-center space-y-3 pt-4">
               <button
                 onClick={() => setQr(workshop.id)}
-                className="rounded-full bg-primary px-3 py-1 text-[10px] text-white shadow-button-solid"
+                className="w-[70px] rounded-full bg-primary px-3 py-1 text-[10px] text-white shadow-button-solid"
               >
                 QR Code
+              </button>
+              <button
+                onClick={async () => {
+                  const confirm = window.confirm(
+                    "ต้องการยกเลิกการลงทะเบียนใช่หรือไม่",
+                  );
+
+                  if (!confirm) {
+                    return;
+                  }
+
+                  await axios
+                    .post("/api/workshop/cancel", {
+                      workshopId: workshop.id,
+                      userId: userPhoneNumber,
+                    })
+                    .then(() => mutateUserData())
+                    .catch((error) => {
+                      console.error("Error cancelling workshop:", error);
+                    });
+                }}
+                className="text-center text-xs text-gray-400"
+              >
+                ยกเลิก
               </button>
             </div>
           </div>
@@ -140,12 +158,36 @@ export default function MyWorkshop() {
                 {tour.date} {tour.time}
               </p>
             </div>
-            <div>
+            <div className="flex flex-col items-center space-y-3 pt-4">
               <button
                 onClick={() => setQr(tour.id)}
                 className="rounded-full bg-primary px-3 py-1 text-[10px] text-white shadow-button-solid"
               >
                 QR Code
+              </button>
+              <button
+                onClick={async () => {
+                  const confirm = window.confirm(
+                    "ต้องการยกเลิกการลงทะเบียนใช่หรือไม่",
+                  );
+
+                  if (!confirm) {
+                    return;
+                  }
+
+                  await axios
+                    .post("/api/tour/cancel", {
+                      tourId: tour.id,
+                      userId: userPhoneNumber,
+                    })
+                    .then(() => mutateUserData())
+                    .catch((error) => {
+                      console.error("Error cancelling tour:", error);
+                    });
+                }}
+                className="text-center text-xs text-gray-400"
+              >
+                ยกเลิก
               </button>
             </div>
           </div>
