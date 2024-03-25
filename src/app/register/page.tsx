@@ -38,20 +38,13 @@ export default function Register() {
     tours: [],
   });
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const [loading, setLoading] = useState(false);
 
   const setFieldError = (fieldName: string, errorMessage: string) => {
     setFormErrors((prevErrors) => ({
       ...prevErrors,
       [fieldName]: errorMessage,
     }));
-  };
-
-  const clearFieldError = (fieldName: string) => {
-    setFormErrors((prevErrors) => {
-      const updatedErrors = { ...prevErrors };
-      delete updatedErrors[fieldName];
-      return updatedErrors;
-    });
   };
 
   useEffect(() => {
@@ -72,6 +65,8 @@ export default function Register() {
 
     setFormErrors({});
 
+    setLoading(true);
+
     try {
       const validatedData = userSchema.parse(formData);
       localStorage.setItem("formData", JSON.stringify(validatedData));
@@ -89,6 +84,8 @@ export default function Register() {
         alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
       }
     }
+
+    setLoading(false);
   };
 
   return (
@@ -187,8 +184,8 @@ export default function Register() {
         />
 
         <div className="flex flex-col items-center space-y-4 py-10">
-          <Button type="submit" className="w-36">
-            ไปต่อ
+          <Button type="submit" className="w-36" disabled={loading}>
+            ลงทะเบียน
           </Button>
           <Link href="/login">
             <Button variant="ghost" size="sm" className="text-xs">

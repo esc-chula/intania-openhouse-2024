@@ -11,6 +11,7 @@ import { FormEvent, useEffect, useState } from "react";
 export default function Login() {
   const router = useRouter();
   const [mobileNumber, setMobileNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const formData = localStorage.getItem("formData");
@@ -28,7 +29,9 @@ export default function Login() {
       return;
     }
 
-    axios
+    setLoading(true);
+
+    await axios
       .get(`/api/user/${mobileNumber}`)
       .then((res) => {
         if (res.data) {
@@ -42,6 +45,8 @@ export default function Login() {
         alert("ไม่พบข้อมูล");
         router.push("/register");
       });
+
+    setLoading(false);
   };
 
   return (
@@ -60,7 +65,7 @@ export default function Login() {
         description="กรอกในรูป 0XXXXXXXXX"
       />
 
-      <Button type="submit" className="w-36">
+      <Button type="submit" className="w-36" disabled={loading}>
         ไปต่อ
       </Button>
     </form>
