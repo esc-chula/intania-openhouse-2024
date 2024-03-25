@@ -45,16 +45,6 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "User not found" }, { status: 500 });
   }
 
-  if (
-    !workshop.result.data().users?.includes(parsedData.userId) ||
-    !user.result.data().workshops?.includes(parsedData.workshopId)
-  ) {
-    return NextResponse.json(
-      { message: "User not registered in workshop" },
-      { status: 400 },
-    );
-  }
-
   await updateDocument("workshops", parsedData.workshopId, {
     users: workshop.result
       .data()
