@@ -48,7 +48,18 @@ export default function Register() {
 
     localStorage.setItem("formData", JSON.stringify(formData));
 
-    await axios.post("/api/user", formData);
+    await axios
+      .post("/api/user", formData)
+      .then((res) => {
+        if (res.data) {
+          router.push("/workshop/reserve");
+        } else {
+          alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+        }
+      })
+      .catch((err) => {
+        alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      });
   };
 
   return (
