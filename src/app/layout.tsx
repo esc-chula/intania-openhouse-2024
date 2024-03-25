@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={lineSeedSansTh.className}>
         <AppLayout>{children}</AppLayout>
       </body>
-      <GoogleAnalytics gaId={process.env.GA_ID!} />
+      <GoogleAnalytics gaId="G-W53RWVWNPT" />
     </html>
   );
 }

@@ -4,11 +4,12 @@ import firebase_app from "../config";
 const db = getFirestore(firebase_app);
 
 export const createDocument = async (
-  colllection: string,
+  collectionName: string,
   id: string,
   data: any,
 ) => {
-  const docRef = doc(db, colllection, id);
+  const name = `${process.env.NODE_ENV === "production" ? "prod" : "dev"}_${collectionName}`;
+  const docRef = doc(db, name, id);
 
   try {
     await setDoc(docRef, data);

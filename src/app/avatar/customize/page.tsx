@@ -56,12 +56,12 @@ export default function AvatarCustomize() {
               onChange={(e) =>
                 setOption({ ...option, tucked: e.target.checked })
               }
-              className="mr-2"
+              className="mr-2 accent-primary"
             />
             <p className="text-xs">เอาเสื้อไว้ในกางเกง</p>
           </div>
         )}
-        <div className="flex h-full w-full flex-wrap items-start overflow-hidden rounded-b-[30px]">
+        <div className="flex aspect-square w-full flex-wrap items-start overflow-hidden overflow-y-scroll rounded-b-[30px]">
           {canBeEmpty.includes(tab) && (
             <div className={`relative aspect-[10/13] w-1/3 overflow-hidden`}>
               <button
@@ -140,7 +140,7 @@ export default function AvatarCustomize() {
                       option[tab as keyof typeof option] ===
                         `${key}-${subOptions[0]}` ? (
                         <>
-                          <div className="fixed bottom-4 left-2 right-2 z-50 rounded-2xl bg-button-solid px-4 shadow-xl">
+                          <div className="fixed bottom-4 left-2 right-2 z-50 grid grid-cols-3 rounded-2xl bg-button-solid px-4 shadow-xl">
                             {colorOptions.map((colorOption) => (
                               <button
                                 key={colorOption}
@@ -166,7 +166,7 @@ export default function AvatarCustomize() {
                                     },
                                   });
                                 }}
-                                className={`aspect-square h-[12vh]`}
+                                className={`w-[15vh]`}
                               >
                                 <div className="relative h-full">
                                   <picture>
@@ -175,7 +175,7 @@ export default function AvatarCustomize() {
                                       key={tab + key}
                                       alt=""
                                       loading="eager"
-                                      className="object-cover"
+                                      className={`object-cover ${zoomedOptions.includes(tab) ? "scale-150" : ""}`}
                                     />
                                   </picture>
                                 </div>

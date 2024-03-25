@@ -2,6 +2,7 @@ export const optionName = {
   base: "ร่างกาย",
   eyes: "ตา",
   eyebrows: "คิ้ว",
+  mouth: "ปาก",
   hair: "ผม",
   shirt: "เสื้อ",
   pants: "กางเกง",
@@ -180,6 +181,17 @@ export const optionImages = {
     "eyes-6": ["default"],
   },
   eyebrows: ["eyebrows-1", "eyebrows-2", "eyebrows-3"],
+  mouth: [
+    "mouth-1",
+    "mouth-2",
+    "mouth-3",
+    "mouth-4",
+    "mouth-5",
+    "mouth-6",
+    "mouth-7",
+    "mouth-8",
+    "mouth-9",
+  ],
   shirt: {
     "shirt-1": ["gray", "black", "red", "white"],
     "shirt-2": ["black", "gray", "red", "white"],
@@ -212,14 +224,14 @@ export const optionImages = {
   },
   shoes: {
     "shoes-1": ["default"],
-    "shoes-2": ["red", "gray", "black", "brown", "white"],
-    "shoes-3": ["red", "gray", "black", "brown", "white"],
-    "shoes-4": ["red", "gray", "black", "brown", "white"],
-    "shoes-5": ["red", "gray", "black", "brown", "white"],
+    "shoes-2": ["black", "gray", "red", "brown", "white"],
+    "shoes-3": ["brown", "gray", "black", "red", "white"],
+    "shoes-4": ["black", "gray", "red", "brown", "white"],
+    "shoes-5": ["gray", "red", "black", "brown", "white"],
     "shoes-6": ["black", "brown", "white"],
     "shoes-7": ["brown", "white", "black"],
-    "shoes-8": ["red", "gray", "black", "brown", "white"],
-    "shoes-9": ["red", "gray", "black", "brown", "white"],
+    "shoes-8": ["black", "gray", "red", "brown", "white"],
+    "shoes-9": ["gray", "red", "black", "brown", "white"],
   },
 };
 
@@ -228,6 +240,7 @@ export const initialOption = {
   hair: `hair-1-${optionImages.hair["hair-1"][0]}`,
   eyes: `eyes-1-${optionImages.eyes["eyes-1"][0]}`,
   eyebrows: optionImages.eyebrows[0],
+  mouth: `mouth-1`,
   shirt: `shirt-1-${optionImages.shirt["shirt-1"][1]}`,
   pants: `pants-5-${optionImages.pants["pants-5"][0]}`,
   outer: `outer-1-${optionImages.outer["outer-1"][0]}`,
@@ -235,7 +248,7 @@ export const initialOption = {
   tucked: false,
 };
 
-export const zoomedOptions = ["eyes", "eyebrows", "outer", "shirt"];
+export const zoomedOptions = ["eyes", "eyebrows", "mouth", "outer", "shirt"];
 
 export const canBeEmpty = [
   "outer",

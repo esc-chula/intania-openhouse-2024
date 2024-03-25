@@ -3,18 +3,24 @@
 import { Tour } from "@/common/types/tour";
 import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
+import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 
 export default function MyWorkshop() {
+  const router = useRouter();
+
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
 
   useEffect(() => {
     const userFormData = localStorage.getItem("formData");
+
     if (!userFormData) {
-      throw new Error("No formData in the local storage");
+      router.push("/register");
+      return;
     }
+
     const userPhoneNumber = (JSON.parse(userFormData) as User).mobileNumber;
 
     const fetchWorkshops = async () => {
@@ -77,7 +83,7 @@ export default function MyWorkshop() {
 
     fetchWorkshops();
     fetchTours();
-  }, []);
+  }, [router]);
 
   const [qr, setQr] = useState<string>("");
 
@@ -145,6 +151,14 @@ export default function MyWorkshop() {
           </div>
         ))}
       </div>
+
+      {workshops.length === 0 && tours.length === 0 && (
+        <div className="flex w-full items-center justify-center">
+          <p className="text-center text-xl font-bold text-white/60">
+            ยังไม่มีข้อมูลการลงทะเบียน
+          </p>
+        </div>
+      )}
     </>
   );
 }

@@ -97,6 +97,20 @@ export default function Avatar({
           />
         </picture>
       )}
+      {option.mouth && (
+        <picture>
+          <img
+            src={
+              useLocalImage
+                ? `/assets/avatar/mouth/${option.mouth}.png`
+                : `https://firebasestorage.googleapis.com/v0/b/intania-open-house.appspot.com/o/avatar%2Fmouth%2F${option.mouth}.png?alt=media`
+            }
+            alt="Avatar"
+            className={`absolute bottom-0 left-0 right-0 z-[3]`}
+            loading="eager"
+          />
+        </picture>
+      )}
       {option.hair && (
         <picture>
           <img

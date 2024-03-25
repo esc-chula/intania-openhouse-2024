@@ -9,8 +9,10 @@ import firebase_app from "../config";
 
 const db = getFirestore(firebase_app);
 
-export const getDocumentById = async (collection: string, id: string) => {
-  const docRef = doc(db, collection, id);
+export const getDocumentById = async (collectionName: string, id: string) => {
+  const name = `${process.env.NODE_ENV === "production" ? "prod" : "dev"}_${collectionName}`;
+
+  const docRef = doc(db, name, id);
 
   try {
     const result = await getDoc(docRef);
@@ -21,7 +23,9 @@ export const getDocumentById = async (collection: string, id: string) => {
 };
 
 export const getAllDocuments = async (collectionName: string) => {
-  const collectionRef = collection(db, collectionName);
+  const name = `${process.env.NODE_ENV === "production" ? "prod" : "dev"}_${collectionName}`;
+
+  const collectionRef = collection(db, name);
 
   try {
     const result = await getDocs(collectionRef);
