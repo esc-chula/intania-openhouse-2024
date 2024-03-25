@@ -1,4 +1,5 @@
 import { WorkshopSchema } from "@/common/schema/workshop";
+import { Workshop } from "@/common/types/workshop";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { getAllDocuments } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,9 +15,15 @@ export const GET = async () => {
     );
   }
 
-  const data = result.docs.map((doc) => {
-    return { id: doc.id, ...doc.data() };
-  });
+  const data = result.docs
+    .map((doc) => {
+      const workshop = { id: doc.id, ...doc.data() } as Workshop;
+      if (workshop.users.length < workshop.maxUser) {
+        return workshop;
+      }
+      return null;
+    })
+    .filter(Boolean);
 
   return NextResponse.json(data);
 };

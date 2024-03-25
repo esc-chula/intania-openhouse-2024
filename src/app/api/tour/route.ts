@@ -1,4 +1,5 @@
 import { TourSchema } from "@/common/schema/tour";
+import { Tour } from "@/common/types/tour";
 import { createDocument } from "@/server/firebase/firestore/create";
 import { getAllDocuments } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,9 +15,15 @@ export const GET = async () => {
     );
   }
 
-  const data = result.docs.map((doc) => {
-    return { id: doc.id, ...doc.data() };
-  });
+  const data = result.docs
+    .map((doc) => {
+      const tour = { id: doc.id, ...doc.data() } as Tour;
+      if (tour.users.length < tour.maxUser) {
+        return tour;
+      }
+      return null;
+    })
+    .filter(Boolean);
 
   return NextResponse.json(data);
 };
