@@ -52,7 +52,7 @@ export default function ReserveWorkshop() {
 
     const fetchTours = async () => {
       try {
-        const response = await fetch("/api/tour");
+        const response = await fetch("/api/tour/user/" + formData.mobileNumber);
         if (!response.ok) {
           throw new Error("Failed to fetch tours");
         }
