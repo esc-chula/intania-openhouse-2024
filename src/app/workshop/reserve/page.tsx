@@ -27,9 +27,9 @@ export default function ReserveWorkshop() {
   useEffect(() => {
     const formData = JSON.parse(localStorage.getItem("formData") ?? "{}");
 
-    if (!formData) {
+    if (!Object.keys(formData).length) {
       router.push("/register");
-      return
+      return;
     }
 
     setMobileNumber(formData.mobileNumber);

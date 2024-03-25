@@ -14,14 +14,14 @@ export default function MyWorkshop() {
   const [tours, setTours] = useState<Tour[]>([]);
 
   useEffect(() => {
-    const userFormData = localStorage.getItem("formData");
+    const userFormData = JSON.parse(localStorage.getItem("formData") ?? "{}");
 
-    if (!userFormData) {
+    if (!Object.keys(userFormData).length) {
       router.push("/register");
       return;
     }
 
-    const userPhoneNumber = (JSON.parse(userFormData) as User).mobileNumber;
+    const userPhoneNumber = (userFormData as User).mobileNumber;
 
     const fetchWorkshops = async () => {
       try {

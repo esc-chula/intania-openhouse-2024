@@ -23,6 +23,11 @@ export default function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!mobileNumber || mobileNumber.length !== 10) {
+      alert("เบอร์โทรศัพท์มือถือไม่ถูกต้อง");
+      return;
+    }
+
     axios
       .get(`/api/user/${mobileNumber}`)
       .then((res) => {
@@ -52,6 +57,7 @@ export default function Login() {
         value={mobileNumber}
         onChange={(e) => setMobileNumber(e.target.value)}
         required
+        description="กรอกในรูป 0XXXXXXXXX"
       />
 
       <Button type="submit" className="w-36">
