@@ -176,11 +176,14 @@ export default function ReserveWorkshop() {
           <option value="" disabled hidden>
             วันที่
           </option>
-          {workshopDates.map((date) => (
-            <option key={date} value={date} className="text-black">
-              {date}
-            </option>
-          ))}
+          {/* group by date (remove dupe) then map */}
+          {workshopDates
+            .filter((date, index, self) => self.indexOf(date) === index)
+            .map((date) => (
+              <option key={date} value={date} className="text-black">
+                {date}
+              </option>
+            ))}
         </Select>
         <Select
           name="time"
