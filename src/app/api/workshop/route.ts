@@ -19,7 +19,8 @@ export const GET = async (req: NextRequest) => {
     .map((doc) => {
       const workshop = { id: doc.id, ...doc.data() } as Workshop;
       if (workshop.users.length < workshop.maxUser) {
-        return workshop;
+        const { users, ...rest } = workshop;
+        return rest;
       }
       return null;
     })

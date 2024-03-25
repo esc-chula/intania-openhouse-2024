@@ -19,7 +19,8 @@ export const GET = async () => {
     .map((doc) => {
       const tour = { id: doc.id, ...doc.data() } as Tour;
       if (tour.users.length < tour.maxUser) {
-        return tour;
+        const { users, ...rest } = tour;
+        return rest;
       }
       return null;
     })
