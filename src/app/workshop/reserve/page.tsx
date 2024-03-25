@@ -144,11 +144,12 @@ export default function ReserveWorkshop() {
 
   const workshopDepartments = Array.from(
     new Set(workshops.map((workshop) => workshop.department)),
-  );
+  ).sort();
 
   const workshopDates = workshops
     .filter((workshop) => workshop.department === selectedWorkshopDepartment)
-    .map((workshop) => workshop.date);
+    .map((workshop) => workshop.date)
+    .sort();
 
   const workshopTimes = workshops
     .filter(
@@ -156,13 +157,37 @@ export default function ReserveWorkshop() {
         workshop.department === selectedWorkshopDepartment &&
         workshop.date === selectedWorkshopDate,
     )
-    .map((workshop) => workshop.time);
+    .map((workshop) => workshop.time)
+    .sort((a, b) => {
+      const timeA = a.split(" - ")[0];
+      const timeB = b.split(" - ")[0];
+      const [aHours, aMinutes] = timeA.split(":").map(Number);
+      const [bHours, bMinutes] = timeB.split(":").map(Number);
 
-  const tourDates = Array.from(new Set(tours.map((tour) => tour.date)));
+      if (aHours !== bHours) {
+        return aHours - bHours;
+      } else {
+        return aMinutes - bMinutes;
+      }
+    });
+
+  const tourDates = Array.from(new Set(tours.map((tour) => tour.date))).sort();
 
   const tourTimes = tours
     .filter((tour) => tour.date === selectedTourDate)
-    .map((tour) => tour.time);
+    .map((tour) => tour.time)
+    .sort((a, b) => {
+      const timeA = a.split(" - ")[0];
+      const timeB = b.split(" - ")[0];
+      const [aHours, aMinutes] = timeA.split(":").map(Number);
+      const [bHours, bMinutes] = timeB.split(":").map(Number);
+
+      if (aHours !== bHours) {
+        return aHours - bHours;
+      } else {
+        return aMinutes - bMinutes;
+      }
+    });
 
   return (
     <div className="flex h-full w-full flex-col justify-between space-y-14 pb-14 pt-4">
