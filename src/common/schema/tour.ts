@@ -6,3 +6,8 @@ export const TourSchema = z.object({
   users: z.optional(z.array(z.string())),
   maxUser: z.number(),
 });
+
+export const CancelTourSchema = z.object({
+  tourId: z.string(),
+  userId: z.string(),
+});
