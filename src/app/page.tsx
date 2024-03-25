@@ -26,7 +26,7 @@ export default function Home() {
             </Button>
           </Link>
 
-          <Link href="/">
+          <Link href="/register">
             <Button variant="ghost" className="w-52">
               ลงทะเบียน Workshop
             </Button>

@@ -4,9 +4,12 @@ import { Tour } from "@/common/types/tour";
 import { Workshop } from "@/common/types/workshop";
 import Button from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ReserveWorkshop() {
+  const router = useRouter();
+
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
@@ -23,6 +26,12 @@ export default function ReserveWorkshop() {
 
   useEffect(() => {
     const formData = JSON.parse(localStorage.getItem("formData") ?? "{}");
+
+    if (!formData) {
+      router.push("/register");
+      return
+    }
+
     setMobileNumber(formData.mobileNumber);
 
     const fetchWorkshops = async () => {
@@ -53,7 +62,7 @@ export default function ReserveWorkshop() {
 
     fetchWorkshops();
     fetchTours();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const selectedWorkshop = workshops.find(
@@ -138,7 +147,7 @@ export default function ReserveWorkshop() {
     .map((tour) => tour.time);
 
   return (
-    <div className="flex h-full w-full flex-col justify-between pb-14 pt-4">
+    <div className="flex h-full w-full flex-col justify-between space-y-14 pb-14 pt-4">
       <div className="flex w-full flex-col items-center space-y-6">
         <h1 className="text-center text-3xl font-bold">
           ลงทะเบียน
@@ -221,7 +230,7 @@ export default function ReserveWorkshop() {
         </Select>
       </div>
 
-      <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center space-y-4 pb-6">
         <p className="text-center text-xs">
           หากจำนวนคนเต็มแล้ว Workshop
           <br />
