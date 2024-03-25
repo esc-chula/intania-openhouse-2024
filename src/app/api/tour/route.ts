@@ -22,6 +22,13 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
+  if (
+    req.headers.get("Authorization")?.replace("Bearer ", "") !==
+    process.env.SECRET_KEY
+  ) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await req.json();
 
   const parseResponse = TourSchema.safeParse(body);

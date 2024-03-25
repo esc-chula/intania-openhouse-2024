@@ -4,7 +4,7 @@ import { getAllDocuments } from "@/server/firebase/firestore/read";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
   const { result, error } = await getAllDocuments("workshops");
 
   if (error || !result) {
@@ -22,6 +22,13 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
+  if (
+    req.headers.get("Authorization")?.replace("Bearer ", "") !==
+    process.env.SECRET_KEY
+  ) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await req.json();
 
   const parseResponse = WorkshopSchema.safeParse(body);
