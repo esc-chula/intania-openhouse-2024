@@ -25,7 +25,6 @@ export default function Register() {
     workshops: [],
     tours: [],
   });
-  const [testInput, setTestInput] = useState("");
 
   useEffect(() => {
     const formData = localStorage.getItem("formData");
@@ -46,10 +45,6 @@ export default function Register() {
     const formData = {
       ...Object.fromEntries(new FormData(e.currentTarget)),
     };
-
-    if (testInput) {
-      return;
-    }
 
     localStorage.setItem("formData", JSON.stringify(formData));
 
@@ -141,13 +136,6 @@ export default function Register() {
           placeholder="เบอร์โทรศัพท์ผู้ปกครอง"
           required
         />
-        <div className="hidden">
-          <Input
-            type="text"
-            value={testInput}
-            onChange={(e) => setTestInput(e.target.value)}
-          />
-        </div>
 
         <div className="flex flex-col items-center space-y-4 py-10">
           <Button type="submit" className="w-36">
