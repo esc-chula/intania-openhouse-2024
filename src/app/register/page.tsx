@@ -93,7 +93,7 @@ export default function Register() {
       <Header />
       <form
         onSubmit={handleSubmit}
-        className="mt-4 flex w-full max-w-md flex-col items-center justify-center gap-5"
+        className="mt-4 flex w-full flex-col items-center justify-center gap-5"
       >
         <Select
           name="prefix"
