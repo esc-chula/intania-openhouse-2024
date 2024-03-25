@@ -217,10 +217,10 @@ export const optionImages = {
   outer: {
     "outer-1": ["default"],
     "outer-2": ["black", "blue", "gray", "pink", "red", "white"],
-    "outer-3": ["black", "blue", "brown", "cream", "gray", "pink", "white"],
-    "outer-4": ["black", "blue", "brown", "cream", "gray", "pink", "white"],
-    "outer-5": ["black", "blue", "brown", "cream", "gray", "pink", "white"],
-    "outer-6": ["black", "blue", "brown", "cream", "gray", "pink", "white"],
+    "outer-3": ["pink", "blue", "brown", "cream", "gray", "black", "white"],
+    "outer-4": ["gray", "blue", "brown", "cream", "black", "pink", "white"],
+    "outer-5": ["white", "blue", "brown", "cream", "gray", "pink", "black"],
+    "outer-6": ["cream", "blue", "brown", "black", "gray", "pink", "white"],
   },
   shoes: {
     "shoes-1": ["default"],
