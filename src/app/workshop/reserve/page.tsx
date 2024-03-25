@@ -164,7 +164,12 @@ export default function ReserveWorkshop() {
         <Select
           name="department"
           value={selectedWorkshopDepartment}
-          onChange={(e) => setSelectedWorkshopDepartment(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopDepartment(e.target.value);
+            setSelectedWorkshopDate("");
+            setSelectedWorkshopTime("");
+            setSelectedWorkshopId("");
+          }}
         >
           <option value="" disabled hidden>
             ภาควิชา
@@ -178,7 +183,11 @@ export default function ReserveWorkshop() {
         <Select
           name="date"
           value={selectedWorkshopDate}
-          onChange={(e) => setSelectedWorkshopDate(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopDate(e.target.value);
+            setSelectedWorkshopTime("");
+            setSelectedWorkshopId("");
+          }}
         >
           <option value="" disabled hidden>
             วันที่
@@ -195,7 +204,9 @@ export default function ReserveWorkshop() {
         <Select
           name="time"
           value={selectedWorkshopTime}
-          onChange={(e) => setSelectedWorkshopTime(e.target.value)}
+          onChange={(e) => {
+            setSelectedWorkshopTime(e.target.value);
+          }}
         >
           <option value="" disabled hidden>
             เวลา
@@ -213,7 +224,11 @@ export default function ReserveWorkshop() {
         <Select
           name="date"
           value={selectedTourDate}
-          onChange={(e) => setSelectedTourDate(e.target.value)}
+          onChange={(e) => {
+            setSelectedTourDate(e.target.value);
+            setSelectedTourTime("");
+            setSelectedTourId("");
+          }}
         >
           <option value="" disabled hidden>
             วันที่
