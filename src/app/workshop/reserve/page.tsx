@@ -226,7 +226,7 @@ export default function ReserveWorkshop() {
         </Select>
       </div>
 
-      {tours.length > 0 && (
+      {tours.length > 0 ? (
         <div className="flex w-full flex-col items-center space-y-6">
           <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
           <Select
@@ -262,15 +262,22 @@ export default function ReserveWorkshop() {
             ))}
           </Select>
         </div>
-      )}
+      ) : null}
 
-      <div className="flex flex-col items-center space-y-4 pb-6">
-        <p className="text-center text-xs">
+      <div className="flex flex-col items-center space-y-4 pb-6 text-center">
+        <p className="text-xs">
           หากจำนวนคนเต็มแล้ว Workshop
           <br />
           ในภาควิชา วัน หรือ เวลา
           <br />
           จะไม่แสดงให้สามารถเลือกได้
+        </p>
+        <p className="text-xs">
+          หมายเหตุ:
+          <br />
+          สามารถลงทะเบียน 1 Workshop ได้ต่อ 1 ภาควิชา
+          <br />
+          และ Intania Tour ได้ 1 รอบ
         </p>
         <Button
           size="default"
