@@ -1,7 +1,9 @@
 import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
+import rawWorkshopsData from "@/data/workshops.json";
 import { getDocumentById } from "@/server/firebase/firestore/read";
 import { updateDocument } from "@/server/firebase/firestore/update";
+import moment from "moment";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -52,28 +54,69 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "User not found" }, { status: 500 });
   }
 
-  const workshopData = workshop.result.data() as Workshop;
+  const workshopsData = workshop.result.data() as Workshop;
   const userData = user.result.data() as User;
 
-  if (workshopData.users.length >= workshopData.maxUser) {
+  if (workshopsData.users.length >= workshopsData.maxUser) {
     return NextResponse.json(
       { message: "Workshop is fully reserved" },
       { status: 400 },
     );
   }
 
-  if (workshopData.users.includes(parsedData.userId)) {
+  if (workshopsData.users.includes(parsedData.userId)) {
     return NextResponse.json(
       { message: "User has already reserve the workshop" },
       { status: 400 },
     );
   }
 
+  const reservedWorkshops = userData.workshops.map((workshopId) => {
+    const workshopData = rawWorkshopsData.find(
+      (workshop) => workshop.id === workshopId,
+    )!;
+
+    return workshopData;
+  });
+
+  const currentDateTime = moment(
+    `${workshopsData.date} ${workshopsData.time.split(" - ")[0]}`,
+    "DD/MM/YYYY HH:mm",
+  );
+  const currentEndTime = moment(
+    `${workshopsData.date} ${workshopsData.time.split(" - ")[1]}`,
+    "DD/MM/YYYY HH:mm",
+  );
+
+  for (let i = 0; i < reservedWorkshops.length; i++) {
+    const comparedWorkshop = reservedWorkshops[i];
+    const comparedDateTime = moment(
+      `${comparedWorkshop.date} ${comparedWorkshop.time.split(" - ")[0]}`,
+      "DD/MM/YYYY HH:mm",
+    );
+    const comparedEndTime = moment(
+      `${comparedWorkshop.date} ${comparedWorkshop.time.split(" - ")[1]}`,
+      "DD/MM/YYYY HH:mm",
+    );
+
+    if (
+      currentDateTime.isBetween(comparedDateTime, comparedEndTime) ||
+      currentEndTime.isBetween(comparedDateTime, comparedEndTime) ||
+      comparedDateTime.isBetween(currentDateTime, currentEndTime) ||
+      comparedEndTime.isBetween(currentDateTime, currentEndTime)
+    ) {
+      return NextResponse.json({
+        message: `ไม่สามารถจองได้ ช่วงเวลาตรงกับของ ${comparedWorkshop.department}`,
+        status: 400,
+      });
+    }
+  }
+
   const updatedWorkshop = await updateDocument(
     "workshops",
     parsedData.workshopId,
     {
-      users: Array.from(new Set([...workshopData.users, parsedData.userId])),
+      users: Array.from(new Set([...workshopsData.users, parsedData.userId])),
     },
   );
 
