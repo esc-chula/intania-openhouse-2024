@@ -26,11 +26,11 @@ export default function Home() {
             </Button>
           </Link>
 
-          <Link href="/register">
+          {/* <Link href="/register">
             <Button variant="ghost" className="w-52">
               ลงทะเบียน Workshop
             </Button>
-          </Link>
+          </Link> */}
         </div>
         <div>
           <a
