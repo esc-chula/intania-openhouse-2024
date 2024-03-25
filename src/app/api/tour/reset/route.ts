@@ -39,16 +39,15 @@ export const POST = async (req: NextRequest) => {
 
   for (const user of usersData) {
     let registeredTours = user.tours.map((tourId) => {
-      const tourData = toursData.find((tour) => tour.id === tourId)!;
-
+      const tourData = toursData.find(
+        (tour) => tour.id.trim() === tourId.trim(),
+      )!;
       return tourData;
     });
 
     for (const tour of registeredTours) {
-      let duplicated = registeredTours;
-
-      if (duplicated.length > 0) {
-        const removingTours = duplicated;
+      if (registeredTours.length > 1) {
+        const removingTours = registeredTours.slice(1);
 
         for (const removingTour of removingTours) {
           await updateDocument("tours", removingTour.id, {
@@ -56,7 +55,7 @@ export const POST = async (req: NextRequest) => {
           });
 
           registeredTours = registeredTours.filter(
-            (w) => w.id !== removingTour.id,
+            (t) => t.id !== removingTour.id,
           );
         }
       }
