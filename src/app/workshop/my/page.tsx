@@ -34,7 +34,7 @@ export default function MyWorkshop() {
     ) as User;
 
     if (!formData.mobileNumber) {
-      router.push("/workshop/register");
+      router.push("/register");
     }
 
     setUserPhoneNumber(formData.mobileNumber);
