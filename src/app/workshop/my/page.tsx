@@ -15,9 +15,7 @@ export default function MyWorkshop() {
 
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [tours, setTours] = useState<Tour[]>([]);
-  const [userPhoneNumber] = useState<string>(
-    (JSON.parse(localStorage.getItem("formData") ?? "{}") as User).mobileNumber,
-  );
+  const [userPhoneNumber, setUserPhoneNumber] = useState<string>("");
 
   const {
     data: userData,
@@ -29,6 +27,18 @@ export default function MyWorkshop() {
     revalidateOnReconnect: false,
     revalidateOnMount: true,
   });
+
+  useEffect(() => {
+    const formData = JSON.parse(
+      localStorage.getItem("formData") ?? "{}",
+    ) as User;
+
+    if (!formData.mobileNumber) {
+      router.push("/workshop/register");
+    }
+
+    setUserPhoneNumber(formData.mobileNumber);
+  }, [router]);
 
   useEffect(() => {
     if (!userData) {
