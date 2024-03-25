@@ -105,10 +105,14 @@ export const POST = async (req: NextRequest) => {
       comparedDateTime.isBetween(currentDateTime, currentEndTime) ||
       comparedEndTime.isBetween(currentDateTime, currentEndTime)
     ) {
-      return NextResponse.json({
-        message: `ไม่สามารถจองได้ ช่วงเวลาตรงกับของ ${comparedWorkshop.department}`,
-        status: 400,
-      });
+      return NextResponse.json(
+        {
+          message: `ไม่สามารถจองได้ ช่วงเวลาตรงกับ workshop ของภาค${comparedWorkshop.department} โปรดเลือกช่วงเวลาอื่นหรือยกเลิกการจองเดิม`,
+        },
+        {
+          status: 400,
+        },
+      );
     }
   }
 
