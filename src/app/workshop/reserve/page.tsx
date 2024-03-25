@@ -103,7 +103,7 @@ export default function ReserveWorkshop() {
 
     try {
       if (selectedWorkshopId !== "") {
-        await fetch("/api/workshop/reserve", {
+        const response = await fetch("/api/workshop/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -113,6 +113,10 @@ export default function ReserveWorkshop() {
             workshopId: selectedWorkshopId,
           }),
         });
+
+        if (response.status === 400) {
+          alert((await response.json()).message);
+        }
       }
 
       if (selectedTourId !== "") {
