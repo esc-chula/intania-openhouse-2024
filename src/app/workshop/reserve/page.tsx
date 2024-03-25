@@ -1,6 +1,7 @@
 "use client";
 
 import { Tour } from "@/common/types/tour";
+import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
 import Button from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
@@ -26,11 +27,12 @@ export default function ReserveWorkshop() {
   const [selectedTourId, setSelectedTourId] = useState<string>("");
 
   useEffect(() => {
-    const formData = JSON.parse(localStorage.getItem("formData") ?? "{}");
+    const formData = JSON.parse(
+      localStorage.getItem("formData") ?? "{}",
+    ) as User;
 
-    if (!Object.keys(formData).length) {
+    if (!formData.mobileNumber) {
       router.push("/register");
-      return;
     }
 
     setMobileNumber(formData.mobileNumber);
