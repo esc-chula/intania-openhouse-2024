@@ -10,6 +10,18 @@ import "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { ZodError, z } from "zod";
+
+const userSchema = z.object({
+  prefix: z.string().min(2),
+  firstName: z.string().min(2),
+  lastName: z.string().min(2),
+  nickname: z.string().min(2),
+  lineId: z.string().optional(),
+  mobileNumber: z.string().startsWith("0").length(10),
+  email: z.string().email(),
+  guardianPhone: z.string().startsWith("0").length(10),
+});
 
 export default function Register() {
   const router = useRouter();
@@ -25,6 +37,22 @@ export default function Register() {
     workshops: [],
     tours: [],
   });
+  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+
+  const setFieldError = (fieldName: string, errorMessage: string) => {
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: errorMessage,
+    }));
+  };
+
+  const clearFieldError = (fieldName: string) => {
+    setFormErrors((prevErrors) => {
+      const updatedErrors = { ...prevErrors };
+      delete updatedErrors[fieldName];
+      return updatedErrors;
+    });
+  };
 
   useEffect(() => {
     const formData = localStorage.getItem("formData");
@@ -42,24 +70,25 @@ export default function Register() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = {
-      ...Object.fromEntries(new FormData(e.currentTarget)),
-    };
+    setFormErrors({});
 
-    localStorage.setItem("formData", JSON.stringify(formData));
-
-    await axios
-      .post("/api/user", formData)
-      .then((res) => {
-        if (res.data) {
-          router.push("/workshop/reserve");
-        } else {
-          alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
-        }
-      })
-      .catch((err) => {
+    try {
+      const validatedData = userSchema.parse(formData);
+      localStorage.setItem("formData", JSON.stringify(validatedData));
+      await axios.post("/api/user", validatedData);
+      router.push("/workshop/reserve");
+    } catch (error) {
+      if (error instanceof ZodError) {
+        error.errors.forEach((err) => {
+          if (err.path) {
+            setFieldError(err.path.join("."), err.message);
+          }
+        });
+      } else {
+        console.error(error);
         alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
-      });
+      }
+    }
   };
 
   return (
@@ -93,6 +122,7 @@ export default function Register() {
           onChange={handleChange}
           placeholder="ชื่อจริง"
           required
+          helperText={formErrors["firstName"]}
         />
 
         <Input
@@ -102,6 +132,7 @@ export default function Register() {
           onChange={handleChange}
           placeholder="นามสกุล"
           required
+          helperText={formErrors["lastName"]}
         />
 
         <Input
@@ -111,6 +142,7 @@ export default function Register() {
           onChange={handleChange}
           placeholder="ชื่อเล่น"
           required
+          helperText={formErrors["nickname"]}
         />
 
         <Input
@@ -119,6 +151,7 @@ export default function Register() {
           value={formData.lineId}
           onChange={handleChange}
           placeholder="Line ID"
+          helperText={formErrors["lineId"]}
         />
 
         <Input
@@ -128,6 +161,8 @@ export default function Register() {
           onChange={handleChange}
           placeholder="เบอร์โทรศัพท์มือถือ"
           required
+          helperText={formErrors["mobileNumber"]}
+          description="กรอกในรูป 0XXXXXXXXX"
         />
 
         <Input
@@ -137,6 +172,7 @@ export default function Register() {
           onChange={handleChange}
           placeholder="อีเมล"
           required
+          helperText={formErrors["email"]}
         />
 
         <Input
@@ -146,6 +182,8 @@ export default function Register() {
           onChange={handleChange}
           placeholder="เบอร์โทรศัพท์ผู้ปกครอง"
           required
+          helperText={formErrors["guardianPhone"]}
+          description="กรอกในรูป 0XXXXXXXXX"
         />
 
         <div className="flex flex-col items-center space-y-4 py-10">
