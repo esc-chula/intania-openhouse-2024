@@ -9,7 +9,7 @@ export default function Layout({
 }>) {
   return (
     <div className="space flex h-full flex-col">
-      <Header />
+      <Header back href="/" />
       <LogoutButton />
       <div className="py-2">
         <PageSwitcher

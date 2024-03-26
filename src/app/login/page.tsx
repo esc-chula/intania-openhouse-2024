@@ -54,7 +54,7 @@ export default function Login() {
       onSubmit={handleSubmit}
       className="flex h-full w-full flex-col items-center justify-between pb-9"
     >
-      <Header back />
+      <Header back href="/register" />
       <Input
         type="text"
         name="mobileNumber"

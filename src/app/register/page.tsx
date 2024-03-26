@@ -95,7 +95,7 @@ export default function Register() {
 
   return (
     <>
-      <Header />
+      <Header back href="/" />
       <form
         onSubmit={handleSubmit}
         className="mt-4 flex w-full flex-col items-center justify-center gap-5"
