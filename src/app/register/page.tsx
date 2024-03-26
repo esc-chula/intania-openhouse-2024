@@ -5,7 +5,6 @@ import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import axios from "axios";
 import "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -70,7 +69,13 @@ export default function Register() {
     try {
       const validatedData = userSchema.parse(formData);
       localStorage.setItem("formData", JSON.stringify(validatedData));
-      await axios.post("/api/user", validatedData);
+      await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validatedData),
+      });
       router.push("/workshop/reserve");
     } catch (error) {
       if (error instanceof ZodError) {
@@ -93,7 +98,7 @@ export default function Register() {
       <Header />
       <form
         onSubmit={handleSubmit}
-        className="mt-4 flex w-full max-w-md flex-col items-center justify-center gap-5"
+        className="mt-4 flex w-full flex-col items-center justify-center gap-5"
       >
         <Select
           name="prefix"

@@ -1,3 +1,6 @@
+import { Tour } from "./tour";
+import { Workshop } from "./workshop";
+
 export type User = {
   prefix: string;
   firstName: string;
@@ -13,4 +16,9 @@ export type User = {
   howFound?: string;
   workshops: string[];
   tours: string[];
+};
+
+export type UserReservation = {
+  workshops: Workshop[];
+  tours: Tour[];
 };

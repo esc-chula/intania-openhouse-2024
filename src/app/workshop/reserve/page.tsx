@@ -1,6 +1,7 @@
 "use client";
 
 import { Tour } from "@/common/types/tour";
+import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
 import Button from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
@@ -26,18 +27,21 @@ export default function ReserveWorkshop() {
   const [selectedTourId, setSelectedTourId] = useState<string>("");
 
   useEffect(() => {
-    const formData = JSON.parse(localStorage.getItem("formData") ?? "{}");
+    const formData = JSON.parse(
+      localStorage.getItem("formData") ?? "{}",
+    ) as User;
 
-    if (!Object.keys(formData).length) {
+    if (!formData.mobileNumber) {
       router.push("/register");
-      return;
     }
 
     setMobileNumber(formData.mobileNumber);
 
     const fetchWorkshops = async () => {
       try {
-        const response = await fetch("/api/workshop");
+        const response = await fetch(
+          "/api/workshop/user/" + formData.mobileNumber,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch workshops");
         }
@@ -50,7 +54,7 @@ export default function ReserveWorkshop() {
 
     const fetchTours = async () => {
       try {
-        const response = await fetch("/api/tour");
+        const response = await fetch("/api/tour/user/" + formData.mobileNumber);
         if (!response.ok) {
           throw new Error("Failed to fetch tours");
         }
@@ -63,7 +67,7 @@ export default function ReserveWorkshop() {
 
     fetchWorkshops();
     fetchTours();
-  }, [router]);
+  }, [router, mobileNumber]);
 
   useEffect(() => {
     const selectedWorkshop = workshops.find(
@@ -100,8 +104,8 @@ export default function ReserveWorkshop() {
     setLoading(true);
 
     try {
-      await Promise.all([
-        fetch("/api/workshop/reserve", {
+      if (selectedWorkshopId !== "") {
+        const response = await fetch("/api/workshop/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -110,8 +114,15 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             workshopId: selectedWorkshopId,
           }),
-        }),
-        fetch("/api/tour/reserve", {
+        });
+
+        if (response.status === 400) {
+          alert((await response.json()).message);
+        }
+      }
+
+      if (selectedTourId !== "") {
+        await fetch("/api/tour/reserve", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -120,8 +131,8 @@ export default function ReserveWorkshop() {
             userId: mobileNumber,
             tourId: selectedTourId,
           }),
-        }),
-      ]);
+        });
+      }
 
       router.push("/workshop/my");
     } catch (error) {
@@ -131,34 +142,52 @@ export default function ReserveWorkshop() {
     setLoading(false);
   };
 
-  const filteredWorkshops = workshops.filter(
-    (workshop) => workshop.users.length < workshop.maxUser,
-  );
   const workshopDepartments = Array.from(
-    new Set(filteredWorkshops.map((workshop) => workshop.department)),
-  );
+    new Set(workshops.map((workshop) => workshop.department)),
+  ).sort();
 
-  const workshopDates = filteredWorkshops
+  const workshopDates = workshops
     .filter((workshop) => workshop.department === selectedWorkshopDepartment)
-    .map((workshop) => workshop.date);
+    .map((workshop) => workshop.date)
+    .sort();
 
-  const workshopTimes = filteredWorkshops
+  const workshopTimes = workshops
     .filter(
       (workshop) =>
         workshop.department === selectedWorkshopDepartment &&
         workshop.date === selectedWorkshopDate,
     )
-    .map((workshop) => workshop.time);
+    .map((workshop) => workshop.time)
+    .sort((a, b) => {
+      const timeA = a.split(" - ")[0];
+      const timeB = b.split(" - ")[0];
+      const [aHours, aMinutes] = timeA.split(":").map(Number);
+      const [bHours, bMinutes] = timeB.split(":").map(Number);
 
-  console.log(tours);
-  const filteredTours = tours.filter(
-    (tour) => tour.users.length < tour.maxUser,
-  );
-  const tourDates = Array.from(new Set(filteredTours.map((tour) => tour.date)));
+      if (aHours !== bHours) {
+        return aHours - bHours;
+      } else {
+        return aMinutes - bMinutes;
+      }
+    });
 
-  const tourTimes = filteredTours
+  const tourDates = Array.from(new Set(tours.map((tour) => tour.date))).sort();
+
+  const tourTimes = tours
     .filter((tour) => tour.date === selectedTourDate)
-    .map((tour) => tour.time);
+    .map((tour) => tour.time)
+    .sort((a, b) => {
+      const timeA = a.split(" - ")[0];
+      const timeB = b.split(" - ")[0];
+      const [aHours, aMinutes] = timeA.split(":").map(Number);
+      const [bHours, bMinutes] = timeB.split(":").map(Number);
+
+      if (aHours !== bHours) {
+        return aHours - bHours;
+      } else {
+        return aMinutes - bMinutes;
+      }
+    });
 
   return (
     <div className="flex h-full w-full flex-col justify-between space-y-14 pb-14 pt-4">
@@ -226,49 +255,58 @@ export default function ReserveWorkshop() {
         </Select>
       </div>
 
-      <div className="flex w-full flex-col items-center space-y-6">
-        <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
-        <Select
-          name="date"
-          value={selectedTourDate}
-          onChange={(e) => {
-            setSelectedTourDate(e.target.value);
-            setSelectedTourTime("");
-            setSelectedTourId("");
-          }}
-        >
-          <option value="" disabled hidden>
-            วันที่
-          </option>
-          {tourDates.map((date) => (
-            <option key={date} value={date} className="text-black">
-              {date}
+      {tours.length > 0 ? (
+        <div className="flex w-full flex-col items-center space-y-6">
+          <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
+          <Select
+            name="date"
+            value={selectedTourDate}
+            onChange={(e) => {
+              setSelectedTourDate(e.target.value);
+              setSelectedTourTime("");
+              setSelectedTourId("");
+            }}
+          >
+            <option value="" disabled hidden>
+              วันที่
             </option>
-          ))}
-        </Select>
-        <Select
-          name="time"
-          value={selectedTourTime}
-          onChange={(e) => setSelectedTourTime(e.target.value)}
-        >
-          <option value="" disabled hidden>
-            เวลา
-          </option>
-          {tourTimes.map((time) => (
-            <option key={time} value={time} className="text-black">
-              {time}
+            {tourDates.map((date) => (
+              <option key={date} value={date} className="text-black">
+                {date}
+              </option>
+            ))}
+          </Select>
+          <Select
+            name="time"
+            value={selectedTourTime}
+            onChange={(e) => setSelectedTourTime(e.target.value)}
+          >
+            <option value="" disabled hidden>
+              เวลา
             </option>
-          ))}
-        </Select>
-      </div>
+            {tourTimes.map((time) => (
+              <option key={time} value={time} className="text-black">
+                {time}
+              </option>
+            ))}
+          </Select>
+        </div>
+      ) : null}
 
-      <div className="flex flex-col items-center space-y-4 pb-6">
-        <p className="text-center text-xs">
+      <div className="flex flex-col items-center space-y-4 pb-6 text-center">
+        <p className="text-xs">
           หากจำนวนคนเต็มแล้ว Workshop
           <br />
           ในภาควิชา วัน หรือ เวลา
           <br />
           จะไม่แสดงให้สามารถเลือกได้
+        </p>
+        <p className="text-xs">
+          หมายเหตุ:
+          <br />
+          สามารถลงทะเบียน 1 Workshop ได้ต่อ 1 ภาควิชา
+          <br />
+          และ Intania Tour ได้ 1 รอบ
         </p>
         <Button
           size="default"
