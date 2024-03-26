@@ -1,4 +1,5 @@
 import Header from "@/components/common/header";
+import LogoutButton from "@/components/common/logout-button";
 import PageSwitcher from "@/components/common/page-switcher";
 
 export default function Layout({
@@ -9,6 +10,7 @@ export default function Layout({
   return (
     <div className="space flex h-full flex-col">
       <Header />
+      <LogoutButton />
       <div className="py-2">
         <PageSwitcher
           links={[
