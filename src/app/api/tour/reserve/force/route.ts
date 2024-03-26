@@ -6,6 +6,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 export const POST = async (req: NextRequest) => {
+  if (
+    req.headers.get("Authorization")?.replace("Bearer ", "") !==
+    process.env.SECRET_KEY
+  ) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await req.json();
   const parseResponse = z
     .object({
