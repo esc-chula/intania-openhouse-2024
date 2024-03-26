@@ -212,11 +212,11 @@
     "id": "chpe",
     "name": {
       "th": "Chemical and Process Engineering",
-      "en": "ChPe",
-      "short": "ChPe"
+      "en": "ChPE",
+      "short": "ChPE"
     },
     "background": "7",
-    "quote_1": "ลานเกียร์ก็สะดุด ชอบ ChPe สุด ๆ ก็เราไง",
-    "quote_2": "ลานอินทาเนียก็สะดุด ชอบ ChPe สุด ๆ ก็เราไง"
+    "quote_1": "ลานเกียร์ก็สะดุด ชอบเคมีสุด ๆ ก็เราไง",
+    "quote_2": "ลานอินทาเนียก็สะดุด ชอบเคมีสุด ๆ ก็เราไง"
   }
 ]
