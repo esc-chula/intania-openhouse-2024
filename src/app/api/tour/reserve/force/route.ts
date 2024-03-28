@@ -59,13 +59,6 @@ export const POST = async (req: NextRequest) => {
   const tourData = tour.result.data() as Tour;
   const userData = user.result.data() as User;
 
-  if (tourData.users.includes(parsedData.userId)) {
-    return NextResponse.json(
-      { message: "User has already reserve the tour" },
-      { status: 400 },
-    );
-  }
-
   const updatedTour = await updateDocument("tours", parsedData.tourId, {
     users: Array.from(new Set([...tourData.users, parsedData.userId])),
   });

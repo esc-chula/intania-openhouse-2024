@@ -62,13 +62,6 @@ export const POST = async (req: NextRequest) => {
   const workshopsData = workshop.result.data() as Workshop;
   const userData = user.result.data() as User;
 
-  if (userData.workshops.includes(parsedData.workshopId)) {
-    return NextResponse.json(
-      { message: "User has already reserved the workshop" },
-      { status: 400 },
-    );
-  }
-
   const updatedWorkshop = await updateDocument(
     "workshops",
     parsedData.workshopId,
