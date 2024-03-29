@@ -32,7 +32,7 @@ export default function Home() {
             </Button>
           </Link>
           
-          <Link href="/cuiic">
+          <Link href="/CUIIC">
             <Button variant="ghost" className="w-52">
               ผลงาน CUIIC
             </Button>

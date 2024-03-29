@@ -1,0 +1,27 @@
+[
+    {
+        "th": "สาขาเคมี",
+        "en": "Chemical category",
+        "id": "CH"
+    },
+    {
+        "th":"สาขาคอมพิวเตอร์",
+        "en":"Computer category",
+        "id":"CP"
+    },
+    {
+        "th": "สาขาไฟฟ้าและพลังงาน",
+        "en": "Electrical and Energy category",
+        "id": "EE"
+    },
+    {
+        "th": "สาขาสิ่งแวดล้อม",
+        "en": "Environmental category",
+        "id": "EV"
+    },
+    {
+        "th": "สาขาโครงสร้างและวัสดุ",
+        "en": "Structural and Materials category",
+        "id": "SM"
+    }
+]
