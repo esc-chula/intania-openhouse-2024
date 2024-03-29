@@ -21,7 +21,7 @@ export default function InnovationCard({
           }}
         />
       </div>
-      <div>
+      <div className="flex flex-col gap-2.5">
         <p className="text-sm text-gray-400">
           {innovation.institution.startsWith("โรงเรียน")
             ? innovation.institution
