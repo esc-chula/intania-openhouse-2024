@@ -8,7 +8,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-1.png"
           alt=""
           fill
-          objectFit="contain"
+          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="relative flex h-[45px] w-[45px] items-center justify-center rounded-lg bg-white">
@@ -16,7 +16,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-2.png"
           alt=""
           fill
-          objectFit="contain"
+          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="relative flex h-[45px] w-[45px] items-center justify-center rounded-lg bg-white">
@@ -24,7 +24,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-3.png"
           alt=""
           fill
-          objectFit="contain"
+          style={{ objectFit: "contain" }}
         />
       </div>
     </div>
