@@ -8,6 +8,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-1.png"
           alt=""
           fill
+          sizes="45px"
           style={{ objectFit: "contain" }}
         />
       </div>
@@ -16,6 +17,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-2.png"
           alt=""
           fill
+          sizes="45px"
           style={{ objectFit: "contain" }}
         />
       </div>
@@ -24,6 +26,7 @@ export default function Sponser() {
           src="/assets/sponsor/sponsor-3.png"
           alt=""
           fill
+          sizes="45px"
           style={{ objectFit: "contain" }}
         />
       </div>
