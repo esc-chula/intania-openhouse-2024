@@ -5,6 +5,7 @@ import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
 import Button from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import { OPEN_RESERVATION } from "@/constants/registration";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -191,132 +192,157 @@ export default function ReserveWorkshop() {
 
   return (
     <div className="flex h-full w-full flex-col justify-between space-y-14 pb-14 pt-4">
-      <div className="flex w-full flex-col items-center space-y-6">
-        <h1 className="text-center text-3xl font-bold">
-          ลงทะเบียน
-          <br />
-          Workshop
-        </h1>
-        <Select
-          name="department"
-          value={selectedWorkshopDepartment}
-          onChange={(e) => {
-            setSelectedWorkshopDepartment(e.target.value);
-            setSelectedWorkshopDate("");
-            setSelectedWorkshopTime("");
-            setSelectedWorkshopId("");
-          }}
-        >
-          <option value="" disabled hidden>
-            ภาควิชา
-          </option>
-          {workshopDepartments.map((department) => (
-            <option key={department} value={department} className="text-black">
-              {department}
-            </option>
-          ))}
-        </Select>
-        <Select
-          name="date"
-          value={selectedWorkshopDate}
-          onChange={(e) => {
-            setSelectedWorkshopDate(e.target.value);
-            setSelectedWorkshopTime("");
-            setSelectedWorkshopId("");
-          }}
-        >
-          <option value="" disabled hidden>
-            วันที่
-          </option>
-          {/* group by date (remove dupe) then map */}
-          {workshopDates
-            .filter((date, index, self) => self.indexOf(date) === index)
-            .map((date) => (
-              <option key={date} value={date} className="text-black">
-                {date}
+      {OPEN_RESERVATION ? (
+        <>
+          <div className="flex w-full flex-col items-center space-y-6">
+            <h1 className="text-center text-3xl font-bold">
+              ลงทะเบียน
+              <br />
+              Workshop
+            </h1>
+            <Select
+              name="department"
+              value={selectedWorkshopDepartment}
+              onChange={(e) => {
+                setSelectedWorkshopDepartment(e.target.value);
+                setSelectedWorkshopDate("");
+                setSelectedWorkshopTime("");
+                setSelectedWorkshopId("");
+              }}
+            >
+              <option value="" disabled hidden>
+                ภาควิชา
               </option>
-            ))}
-        </Select>
-        <Select
-          name="time"
-          value={selectedWorkshopTime}
-          onChange={(e) => {
-            setSelectedWorkshopTime(e.target.value);
-          }}
-        >
-          <option value="" disabled hidden>
-            เวลา
-          </option>
-          {workshopTimes.map((time) => (
-            <option key={time} value={time} className="text-black">
-              {time}
-            </option>
-          ))}
-        </Select>
-      </div>
+              {workshopDepartments.map((department) => (
+                <option
+                  key={department}
+                  value={department}
+                  className="text-black"
+                >
+                  {department}
+                </option>
+              ))}
+            </Select>
+            <Select
+              name="date"
+              value={selectedWorkshopDate}
+              onChange={(e) => {
+                setSelectedWorkshopDate(e.target.value);
+                setSelectedWorkshopTime("");
+                setSelectedWorkshopId("");
+              }}
+            >
+              <option value="" disabled hidden>
+                วันที่
+              </option>
+              {/* group by date (remove dupe) then map */}
+              {workshopDates
+                .filter((date, index, self) => self.indexOf(date) === index)
+                .map((date) => (
+                  <option key={date} value={date} className="text-black">
+                    {date}
+                  </option>
+                ))}
+            </Select>
+            <Select
+              name="time"
+              value={selectedWorkshopTime}
+              onChange={(e) => {
+                setSelectedWorkshopTime(e.target.value);
+              }}
+            >
+              <option value="" disabled hidden>
+                เวลา
+              </option>
+              {workshopTimes.map((time) => (
+                <option key={time} value={time} className="text-black">
+                  {time}
+                </option>
+              ))}
+            </Select>
+          </div>
 
-      {tours.length > 0 ? (
-        <div className="flex w-full flex-col items-center space-y-6">
-          <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
-          <Select
-            name="date"
-            value={selectedTourDate}
-            onChange={(e) => {
-              setSelectedTourDate(e.target.value);
-              setSelectedTourTime("");
-              setSelectedTourId("");
-            }}
-          >
-            <option value="" disabled hidden>
-              วันที่
-            </option>
-            {tourDates.map((date) => (
-              <option key={date} value={date} className="text-black">
-                {date}
-              </option>
-            ))}
-          </Select>
-          <Select
-            name="time"
-            value={selectedTourTime}
-            onChange={(e) => setSelectedTourTime(e.target.value)}
-          >
-            <option value="" disabled hidden>
-              เวลา
-            </option>
-            {tourTimes.map((time) => (
-              <option key={time} value={time} className="text-black">
-                {time}
-              </option>
-            ))}
-          </Select>
+          {tours.length > 0 ? (
+            <div className="flex w-full flex-col items-center space-y-6">
+              <h1 className="text-center text-3xl font-bold">Intania Tour</h1>
+              <Select
+                name="date"
+                value={selectedTourDate}
+                onChange={(e) => {
+                  setSelectedTourDate(e.target.value);
+                  setSelectedTourTime("");
+                  setSelectedTourId("");
+                }}
+              >
+                <option value="" disabled hidden>
+                  วันที่
+                </option>
+                {tourDates.map((date) => (
+                  <option key={date} value={date} className="text-black">
+                    {date}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                name="time"
+                value={selectedTourTime}
+                onChange={(e) => setSelectedTourTime(e.target.value)}
+              >
+                <option value="" disabled hidden>
+                  เวลา
+                </option>
+                {tourTimes.map((time) => (
+                  <option key={time} value={time} className="text-black">
+                    {time}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          ) : null}
+
+          <div className="flex flex-col items-center space-y-4 pb-6 text-center">
+            <p className="text-xs">
+              หากจำนวนคนเต็มแล้ว Workshop
+              <br />
+              ในภาควิชา วัน หรือ เวลา
+              <br />
+              จะไม่แสดงให้สามารถเลือกได้
+            </p>
+            <p className="text-xs">
+              หมายเหตุ:
+              <br />
+              สามารถลงทะเบียน 1 Workshop ได้ต่อ 1 ภาควิชา
+              <br />
+              และ Intania Tour ได้ 1 รอบ
+            </p>
+            <Button
+              size="default"
+              className="w-36"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              จอง
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="flex h-full flex-col items-center justify-center space-y-10 text-center">
+          <p className="text-center text-2xl font-bold">
+            ขออภัย การลงทะเบียน
+            <br />
+            Workshop และ Intania Tour
+            <br />
+            ได้ปิดแล้ว
+          </p>
+          <p>
+            แล้วมาเจอกันนะ!
+            <br />
+            วันที่ 30 - 31 March 2024
+            <br />
+            @Faculty of Engineering <br /> Chulalongkorn University
+          </p>
         </div>
-      ) : null}
-
-      <div className="flex flex-col items-center space-y-4 pb-6 text-center">
-        <p className="text-xs">
-          หากจำนวนคนเต็มแล้ว Workshop
-          <br />
-          ในภาควิชา วัน หรือ เวลา
-          <br />
-          จะไม่แสดงให้สามารถเลือกได้
-        </p>
-        <p className="text-xs">
-          หมายเหตุ:
-          <br />
-          สามารถลงทะเบียน 1 Workshop ได้ต่อ 1 ภาควิชา
-          <br />
-          และ Intania Tour ได้ 1 รอบ
-        </p>
-        <Button
-          size="default"
-          className="w-36"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          จอง
-        </Button>
-      </div>
+      )}
     </div>
   );
 }

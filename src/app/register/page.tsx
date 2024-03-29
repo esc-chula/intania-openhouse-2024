@@ -5,6 +5,7 @@ import Header from "@/components/common/header";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import { OPEN_REGISTRATION } from "@/constants/registration";
 import "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -50,7 +51,13 @@ export default function Register() {
     const formData = localStorage.getItem("formData");
 
     if (formData) {
-      router.push("/workshop/reserve");
+      router.push("/workshop/my");
+    } else {
+      if (OPEN_REGISTRATION) {
+        return;
+      } else {
+        router.push("/login");
+      }
     }
   }, [router]);
 
@@ -92,6 +99,10 @@ export default function Register() {
 
     setLoading(false);
   };
+
+  if (!OPEN_REGISTRATION) {
+    return null;
+  }
 
   return (
     <>
