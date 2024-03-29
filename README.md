@@ -12,6 +12,12 @@
 
 - [https://intania-openhouse-2024-dev.vercel.app](https://intania-openhouse-2024-dev.vercel.app)
 
+## Export Firestore Data
+
+```bash
+bun export:csv <collection>
+```
+
 ## Getting Started
 
 1. Setup `.env.local` file, example can be found on `.env.example`
