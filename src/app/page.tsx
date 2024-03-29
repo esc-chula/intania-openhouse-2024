@@ -31,6 +31,12 @@ export default function Home() {
               ลงทะเบียน Workshop
             </Button>
           </Link>
+          
+          <Link href="/cuiic">
+            <Button variant="ghost" className="w-52">
+              ผลงาน CUIIC
+            </Button>
+          </Link>
         </div>
         <div>
           <a
