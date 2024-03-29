@@ -32,10 +32,11 @@ const exportCollectionToCSV = async (collectionName: string) => {
     csvStream.pipe(writableStream);
 
     const headers = Object.keys(result.docs[0].data());
-    csvStream.write(headers);
+    csvStream.write([...headers, "id"]);
 
     result.docs.forEach((doc) => {
       const rowData = headers.map((header) => doc.data()[header]);
+      rowData.push(doc.id);
       csvStream.write(rowData);
     });
 
