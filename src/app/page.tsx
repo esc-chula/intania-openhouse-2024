@@ -1,5 +1,6 @@
 import IntaniaOPH2024Logo from "@/components/common/logo";
 import Button from "@/components/ui/button";
+import { OPEN_REGISTRATION } from "@/constants/registration";
 import Link from "next/link";
 import { FiInstagram } from "react-icons/fi";
 
@@ -28,10 +29,12 @@ export default function Home() {
 
           <Link href="/register">
             <Button variant="ghost" className="w-52">
-              ลงทะเบียน Workshop
+              {OPEN_REGISTRATION
+                ? "ลงทะเบียน Workshop"
+                : "ผลลงทะเบียน Workshop"}
             </Button>
           </Link>
-          
+
           <Link href="/CUIIC">
             <Button variant="ghost" className="w-52">
               ผลงาน CUIIC

@@ -5,10 +5,9 @@ import { User } from "@/common/types/user";
 import { Workshop } from "@/common/types/workshop";
 import Button from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import { OPEN_RESERVATION } from "@/constants/registration";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const OPEN_RESERVATION = false;
 
 export default function ReserveWorkshop() {
   const router = useRouter();
